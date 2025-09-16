@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FECART 2025 - Previsão de Moedas BRICS+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.2.1"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #2D815D 0%, #3AA177 100%);
+        }
+        .currency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        .risk-tag {
+            transition: all 0.2s ease;
+        }
+        .risk-tag:hover {
+            transform: scale(1.05);
+        }
+        html {
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-chart-line text-3xl mr-3"></i>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold">FECART 2025</h1>
+                        <p class="text-blue-200">Sistema de Previsão de Moedas BRICS+</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:block">
+                        <p class="text-blue-200">Evento acadêmico</p>
+                        <p class="font-semibold">Edição 2025</p>
+                    </div>
+                    <div class="bg-white text-blue-800 rounded-full p-2 tooltip">
+                        <i class="fas fa-globe-americas text-xl"></i>
+                        <span class="tooltiptext">Análise de moedas dos países BRICS+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8 fade-in">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-search-dollar mr-3 text-blue-600"></i>
+                Selecione a Moeda para Análise
+            </h2>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" id="currency-cards">
+                </div>
+        </section>
+
+        <section id="analysis-section" class="hidden bg-white rounded-xl shadow-md p-6 mb-8 fade-in">
+            <div id="content-container">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-chart-bar mr-3 text-blue-600"></i>
+                            <span id="currency-title">USD → BRL (Real Brasileiro)</span>
+                        </h2>
+                        <p class="text-gray-600" id="reliability-text">Confiabilidade do modelo: 85%</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex space-x-3">
+                        <button id="refresh-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center transition-colors duration-300">
+                            <i class="fas fa-sync-alt mr-2"></i> Atualizar
+                        </button>
+                        <button id="change-currency-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg flex items-center transition-colors duration-300">
+                            <i class="fas fa-exchange-alt mr-2"></i> Alterar Moeda
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <div class="flex justify-center mb-4">
+                    <div class="inline-flex rounded-md shadow-sm">
+                        <button id="btn-1month">
+                        </button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="currency-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+                    <h3 class="text-lg font-semibold mb-4">Representação do País</h3>
+                    <div class="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden border-2 border-gray-200">
+                        <img id="country-flag" src="" alt="Bandeira do país" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-4 w-full">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Confiabilidade</span>
+                            <span class="text-sm font-medium text-gray-700" id="reliability-percent">0%</span>
+                        </div>
+                        <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+                            <div id="reliability-bar" class="reliability-bar"></div>
+                            <div id="risk-level-bar" class="risk-level-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4">
+                    <h3 class="text-lg font-semibold mb-4">Silhueta do País</h3>
+                    <div class="w-full h-32 bg-gray-100 rounded flex items-center justify-center overflow-hidden border border-gray-200">
+                        <img id="country-silhouette" src="" alt="Silhueta do país" class="w-full h-full object-contain p-2">
+                    </div>
+                    <p class="mt-2 text-sm text-gray-600 text-center">Mapa ilustrativo do país</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500 hover:shadow-md transition-shadow duration-300">
+                    <p class="text-sm text-blue-800 font-medium">Última Cotação</p>
+                    <p class="text-2xl font-bold text-blue-900" id="last-rate">5.2345</p>
+                    <p class="text-xs text-blue-600" id="last-date">20/06/2023</p>
+                </div>
+                <div class="bg-green-50 rounded-lg p-4 border-l-4 border-green-500 hover:shadow-md transition-shadow duration-300">
+                    <p class="text-sm text-green-800 font-medium">Previsão 30 Dias</p>
+                    <p class="text-2xl font-bold text-green-900" id="predicted-rate">5.3120</p>
+                    <p class="text-xs text-green-600" id="prediction-date">20/07/2023</p>
+                </div>
+                <div class="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-500 hover:shadow-md transition-shadow duration-300">
+                    <p class="text-sm text-orange-800 font-medium">Previsão 3 Meses</p>
+                    <p class="text-2xl font-bold text-orange-900" id="predicted-rate-3months">5.4120</p>
+                    <p class="text-xs text-orange-600" id="prediction-date-3months">20/09/2023</p>
+                </div>
+                <div class="bg-red-50 rounded-lg p-4 border-l-4 border-red-500 hover:shadow-md transition-shadow duration-300">
+                    <p class="text-sm text-red-800 font-medium">Previsão 6 Meses</p>
+                    <p class="text-2xl font-bold text-red-900" id="predicted-rate-6months">5.5120</p>
+                    <p class="text-xs text-red-600" id="prediction-date-6months">20/12/2023</p>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500 hover:shadow-md transition-shadow duration-300">
+                    <p class="text-sm text-purple-800 font-medium">Variação Estimada</p>
+                    <p class="text-2xl font-bold text-purple-900" id="change-percent">+1.48%</p>
+                    <p class="text-xs text-purple-600">Em relação à última cotação</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-4 mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-info-circle mr-2 text-blue-600"></i>
+                    Análise do País
+                </h3>
+                <div id="country-analysis-content" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p class="mt-3 text-sm text-gray-500">${country.description}</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-3 text-red-500"></i>
+                    Fatores de Risco Atuais
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <div id="risk-factors-content">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">Econômicos:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm risk-tag">
+                                        Alta dos juros nos EUA
+                                    </span>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm risk-tag">
+                                        Oscilação no preço do petróleo
+                                    </span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm risk-tag">
+                                        Crescimento do comércio BRICS+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">Políticos:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm risk-tag">
+                                        Tensões geopolíticas
+                                    </span>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm risk-tag">
+                                        Eleições na África do Sul
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">Mercado:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm risk-tag">
+                                        Volatilidade do dólar
+                                    </span>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm risk-tag">
+                                        Demanda por commodities
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 rounded-lg p-4 border-l-4 border-yellow-500 mt-4">
+                            <h3 class="font-medium text-yellow-800 mb-2">Nível de Risco Atual:</h3>
+                            <div class="flex items-center">
+                                <div id="risk-level-indicator" class="w-full h-2 bg-gray-200 rounded-full mr-4 overflow-hidden">
+                                    <div id="risk-level-bar" class="h-full transition-all duration-1000" style="width: 0%"></div>
+                                </div>
+                                <span id="risk-level-text" class="font-semibold text-yellow-800">Carregando...</span>
+                            </div>
+                            <p class="text-sm text-yellow-600 mt-2" id="risk-updated-text">Última atualização: -</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-newspaper mr-2 text-blue-600"></i>
+                            Notícias Recentes
+                        </h3>
+                        <div id="risk-news-content" class="space-y-4">
+                            <div class="border-b border-gray-200 pb-4 hover:bg-gray-100 transition-colors duration-200 p-2 rounded">
+                                <a href="https://www.reuters.com" target="_blank" rel="noopener noreferrer" class="font-medium hover:underline">Banco Central do Brasil anuncia nova alta nos juros básicos</a>
+                                <div class="flex justify-between text-sm text-gray-500 mt-1">
+                                    <span class="font-medium">Reuters</span>
+                                    <span>15/06/2023</span>
+                                </div>
+                                <div class="text-xs mt-1 text-red-600">
+                                    Sentimento: -0.45
+                                </div>
+                            </div>
+                            <div class="border-b border-gray-200 pb-4 hover:bg-gray-100 transition-colors duration-200 p-2 rounded">
+                                <a href="https://www.bloomberg.com" target="_blank" rel="noopener noreferrer" class="font-medium hover:underline">China reduz taxas de juros para estimular economia em desaceleração</a>
+                                <div class="flex justify-between text-sm text-gray-500 mt-1">
+                                    <span class="font-medium">Bloomberg</span>
+                                    <span>10/06/2023</span>
+                                </div>
+                                <div class="text-xs mt-1 text-green-600">
+                                    Sentimento: +0.32
+                                </div>
+                            </div>
+                            <div class="border-b border-gray-200 pb-4 hover:bg-gray-100 transition-colors duration-200 p-2 rounded">
+                                <a href="https://www.ft.com" target="_blank" rel="noopener noreferrer" class="font-medium hover:underline">Rússia anuncia medidas para conter queda do rublo após sanções ocidentais</a>
+                                <div class="flex justify-between text-sm text-gray-500 mt-1">
+                                    <span class="font-medium">Financial Times</span>
+                                    <span>08/06/2023</span>
+                                </div>
+                                <div class="text-xs mt-1 text-gray-600">
+                                    Sentimento: -0.05
+                                </div>
+                            </div>
+                            <div>
+                                <a href="https://www.cnbc.com" target="_blank" rel="noopener noreferrer" class="font-medium hover:underline">África do Sul sofre com apagões e impacto na moeda local</a>
+                                <div class="flex justify-between text-sm text-gray-500 mt-1">
+                                    <span class="font-medium">CNBC</span>
+                                    <span>03/06/2023</span>
+                                </div>
+                                <div class="text-xs mt-1 text-red-600">
+                                    Sentimento: -0.78
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fas fa-cogs mr-2 text-blue-600"></i>
+                    Detalhes do Modelo Preditivo
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2">Algoritmo Utilizado (Métodos Ensemble):</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                                <span>Análise de Sentimento</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                                <span>Simulação de Confiabilidade e Risco</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-3 h-3 bg-orange-500 rounded-full mr-2"></span>
+                                <span>Modelo ARIMA</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
+                                <span>Modelo Prophet</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                                <span>Modelo de Regressão Linear</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2">Fontes de Dados:</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>AwesomeAPI</span>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="loading-indicator" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white rounded-xl p-8 flex flex-col items-center shadow-xl">
+                <div class="loading-spinner mb-4"></div>
+                <p class="text-lg font-semibold text-gray-800">Processando dados...</p>
+                <p class="text-gray-600 mt-2" id="loading-text">Carregando informações da moeda selecionada</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold">FECART 2025</h3>
+                    <p class="text-gray-400">Sistema de Previsão de Moedas</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300" aria-label="Twitter">
+                        <i class="fab fa-twitter text-xl"></i>
+                        <span class="sr-only">Twitter</span>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300" aria-label="Instagram">
+                        <i class="fab fa-instagram text-xl"></i>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors duration-300" aria-label="GitHub">
+                        <i class="fab fa-github text-xl"></i>
+                        <span class="sr-only">GitHub</span>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm space-y-2">
+                <p>© 2025 FECART - Todos os direitos reservados. Dados fornecidos para fins acadêmicos.</p>
+                <p>Curso de IA - Projeto Futurista</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <h4 class="font-semibold text-white mb-2">Alunos do Projeto</h4>
+                        <p>Beatriz Aysha de Lima São Bernardo</p>
+                        <p>Miguel Rodrigues Pereira Francisco</p>
+                        <p>Rafael Riquena Salto</p>
+                        <p>Vitor Yuji Aguiar Marques Kurahassi</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white mb-2">Professores Supervisionando</h4>
+                        <p>Claudineia de Araujo Jacob</p>
+                        <p>Glenarison Luiz Ferreira</p>
+                        <p>Katia Milani Lara Bossi</p>
+                        <p>Luis Fernando dos Santos Pires</p>
+                        <p>Robson de Oliveira Cardoso</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
