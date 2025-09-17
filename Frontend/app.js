@@ -96,6 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Análse do País
         const countryDescriptionElement = document.getElementById('country-analysis-content').querySelector('p');
         countryDescriptionElement.textContent = data.country_info.description;
+        const keywordsElement = document.getElementById('country-analysis-content').querySelector('.keywords-text');
+        keywordsElement.textContent = data.country_info.keywords.join(', ');
 
         // Atualizar elementos da página
         document.getElementById('currency-title').textContent = `${info.name} - ${info.moeda}`;
@@ -139,149 +141,190 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 // Renderizar gráfico
-// Renderizar gráfico
 const renderChart = (historicalData, countryInfo, data) => {
-    const ctx = document.getElementById('currency-chart').getContext('2d');
+        const ctx = document.getElementById('currency-chart').getContext('2d');
 
-    if (myChart) {
-        myChart.destroy();
-    }
+        if (myChart) {
+            myChart.destroy();
+        }
 
-    // Dados de previsão
-    const lastHistoricalPoint = historicalData[historicalData.length - 1];
-    const today = new Date();
-    const predictionPoint1m = {
-        x: addDays(today, 30).toISOString(),
-        y: data.predicted_rate_1m
-    };
-    const predictionPoint3m = {
-        x: addDays(today, 90).toISOString(),
-        y: data.predicted_rate_3m
-    };
-    const predictionPoint6m = {
-        x: addDays(today, 180).toISOString(),
-        y: data.predicted_rate_6m
-    };
+        // Dados de previsão
+        const lastHistoricalPoint = historicalData[historicalData.length - 1];
+        const today = new Date();
+        const predictionPoint1m = {
+            x: addDays(today, 30).toISOString(),
+            y: data.predicted_rate_1m
+        };
+        const predictionPoint3m = {
+            x: addDays(today, 90).toISOString(),
+            y: data.predicted_rate_3m
+        };
+        const predictionPoint6m = {
+            x: addDays(today, 180).toISOString(),
+            y: data.predicted_rate_6m
+        };
 
-    myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            datasets: [{
-                label: 'Cotação Histórica',
-                data: historicalData.map(d => ({
-                    x: d.date,
-                    y: d.value
-                })),
-                borderColor: countryInfo.color,
-                backgroundColor: `${countryInfo.color}20`,
-                borderWidth: 2,
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                pointBackgroundColor: countryInfo.color,
-            }, {
-                // Segmento de linha verde (Histórico -> 1 Mês)
-                label: '',
-                data: [{
-                    x: lastHistoricalPoint.date,
-                    y: lastHistoricalPoint.value
-                }, predictionPoint1m],
-                borderColor: '#22c55e',
-                borderWidth: 2,
-                borderDash: [5, 5],
-                fill: false,
-                pointRadius: 0,
-                showLine: true,
-            }, {
-                // Ponto da Previsão de 1 Mês (para a legenda)
-                label: 'Previsão (1 Mês)',
-                data: [predictionPoint1m],
-                backgroundColor: '#22c55e',
-                pointRadius: 6,
-                pointBorderColor: '#fff',
-                pointBackgroundColor: '#22c55e',
-                pointHoverRadius: 8,
-                showLine: false,
-            }, {
-                // Segmento de linha amarela (1 Mês -> 3 Meses)
-                label: '',
-                data: [predictionPoint1m, predictionPoint3m],
-                borderColor: '#eab308',
-                borderWidth: 2,
-                borderDash: [5, 5],
-                fill: false,
-                pointRadius: 0,
-                showLine: true,
-            }, {
-                // Ponto da Previsão de 3 Meses (para a legenda)
-                label: 'Previsão (3 Meses)',
-                data: [predictionPoint3m],
-                backgroundColor: '#eab308',
-                pointRadius: 6,
-                pointBorderColor: '#fff',
-                pointBackgroundColor: '#eab308',
-                pointHoverRadius: 8,
-                showLine: false,
-            }, {
-                // Segmento de linha vermelha (3 Meses -> 6 Meses)
-                label: '',
-                data: [predictionPoint3m, predictionPoint6m],
-                borderColor: '#ef4444',
-                borderWidth: 2,
-                borderDash: [5, 5],
-                fill: false,
-                pointRadius: 0,
-                showLine: true,
-            }, {
-                // Ponto da Previsão de 6 Meses (para a legenda)
-                label: 'Previsão (6 Meses)',
-                data: [predictionPoint6m],
-                backgroundColor: '#ef4444',
-                pointRadius: 6,
-                pointBorderColor: '#fff',
-                pointBackgroundColor: '#ef4444',
-                pointHoverRadius: 8,
-                showLine: false,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top',
-                },
-                tooltip: {
-                    mode: 'point',
-                    intersect: false,
-                }
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    // Dados Históricos
+                    label: 'Cotação Histórica',
+                    data: historicalData.map(d => ({
+                        x: new Date(d.date),
+                        y: d.value
+                    })),
+                    borderColor: countryInfo.color,
+                    backgroundColor: `${countryInfo.color}20`,
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 3,
+                    pointBackgroundColor: countryInfo.color,
+                    pointHoverRadius: 5
+                }, {
+                    // Segmento de linha verde (Histórico -> 1 Mês)
+                    label: '1 Mês',
+                    data: [{
+                        x: new Date(lastHistoricalPoint.date),
+                        y: lastHistoricalPoint.value
+                    }, {
+                        x: new Date(predictionPoint1m.x),
+                        y: predictionPoint1m.y
+                    }],
+                    borderColor: '#22c55e',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0,
+                    showLine: true,
+                }, {
+                    // Ponto da Previsão de 1 Mês (para a legenda)
+                    label: 'Previsão (1 Mês)',
+                    data: [{
+                        x: new Date(predictionPoint1m.x),
+                        y: predictionPoint1m.y
+                    }],
+                    backgroundColor: '#22c55e',
+                    pointRadius: 6,
+                    pointBorderColor: '#fff',
+                    pointBackgroundColor: '#22c55e',
+                    pointHoverRadius: 8,
+                    showLine: false,
+                }, {
+                    // Segmento de linha amarela (1 Mês -> 3 Meses)
+                    label: '3 Meses',
+                    data: [{
+                        x: new Date(predictionPoint1m.x),
+                        y: predictionPoint1m.y
+                    }, {
+                        x: new Date(predictionPoint3m.x),
+                        y: predictionPoint3m.y
+                    }],
+                    borderColor: '#eab308',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0,
+                    showLine: true,
+                }, {
+                    // Ponto da Previsão de 3 Meses (para a legenda)
+                    label: 'Previsão (3 Meses)',
+                    data: [{
+                        x: new Date(predictionPoint3m.x),
+                        y: predictionPoint3m.y
+                    }],
+                    backgroundColor: '#eab308',
+                    pointRadius: 6,
+                    pointBorderColor: '#fff',
+                    pointBackgroundColor: '#eab308',
+                    pointHoverRadius: 8,
+                    showLine: false,
+                }, {
+                    // Segmento de linha vermelha (3 Meses -> 6 Meses)
+                    label: '6 Meses',
+                    data: [{
+                        x: new Date(predictionPoint3m.x),
+                        y: predictionPoint3m.y
+                    }, {
+                        x: new Date(predictionPoint6m.x),
+                        y: predictionPoint6m.y
+                    }],
+                    borderColor: '#ef4444',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0,
+                    showLine: true,
+                }, {
+                    // Ponto da Previsão de 6 Meses (para a legenda)
+                    label: 'Previsão (6 Meses)',
+                    data: [{
+                        x: new Date(predictionPoint6m.x),
+                        y: predictionPoint6m.y
+                    }],
+                    backgroundColor: '#ef4444',
+                    pointRadius: 6,
+                    pointBorderColor: '#fff',
+                    pointBackgroundColor: '#ef4444',
+                    pointHoverRadius: 8,
+                    showLine: false,
+                }]
             },
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'month',
-                        tooltipFormat: 'dd/MM/yyyy',
-                        displayFormats: {
-                            day: 'dd/MM'
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'month'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Data'
                         }
                     },
-                    title: {
-                        display: true,
-                        text: 'Data'
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Valor (R$)'
+                        }
                     }
                 },
-                y: {
-                    title: {
+                plugins: {
+                    tooltip: {
+                        mode: 'point',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('pt-BR', {
+                                        style: 'currency',
+                                        currency: 'BRL'
+                                    }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    },
+                    legend: {
                         display: true,
-                        text: 'Valor (R$)'
+                        labels: {
+                            filter: function(item, chart) {
+                                // Oculta os labels que começam com "Previsão"
+                                return !item.text.startsWith('Previsão');
+                            }
+                        }
                     }
                 }
             }
-        }
-    });
-};
+        });
+    };
 
     // Funções auxiliares
     const getReliabilityColor = (percent) => {
