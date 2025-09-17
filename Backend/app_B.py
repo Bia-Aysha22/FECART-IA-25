@@ -30,20 +30,12 @@ NEWS_API_KEY = "579cf0d4f8be4534a96cfa001c58d315"
 
 # Mapeamento de moedas para os tickers da AwesomeAPI e informações completas
 MOEDAS_DISPONIVEIS = {
-    "Brasil": {
-        "moeda": "Real", "ticker": "BRL", "codigo": "BRL", "flag": "🇧🇷",
-        "flag_img": "https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg",
-        "silhouette": "https://static.vecteezy.com/system/resources/previews/057/095/416/non_2x/silhouette-map-of-brazil-on-transparent-backhround-free-png.png",
-        "color": "#009C3B", "keywords": ["Brasil", "economia brasileira", "real brasileiro"],
-        "description": "O Real Brasileiro é a moeda oficial do Brasil, a maior economia da América Latina.",
-        "period_days": 120
-    },
     "Rússia": {
         "moeda": "Rublo Russo", "ticker": "RUB", "codigo": "RUB", "flag": "🇷🇺",
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
         "silhouette": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Babayasin_Russia_outline_map.svg/1280px-Babayasin_Russia_outline_map.png",
         "color": "#D52B1E", "keywords": ["Rússia", "economia russa", "rublo", "gás", "petróleo", "sanções"],
-        "description": "O Rublo Russo é a moeda da Rússia, uma das maiores exportadoras de petróleo e gás do mundo.",
+        "description": "O Rublo Russo é a moeda da Rússia, uma economia globalmente integrada e altamente dependente das exportações de commodities como petróleo e gás natural. Sua cotação é sensível a eventos geopolíticos, a flutuações nos preços das commodities e a sanções econômicas internacionais, refletindo a complexidade do cenário político e comercial global.",
         "period_days": 30
     },
     "Índia": {
@@ -51,7 +43,7 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
         "silhouette": "https://static.vecteezy.com/system/resources/previews/037/797/947/non_2x/country-map-india-free-png.png",
         "color": "#FF9933", "keywords": ["Índia", "economia indiana", "rúpia"],
-        "description": "A Rúpia Indiana é a moeda oficial da Índia, uma das economias que mais crescem no mundo.",
+        "description": "A Rúpia Indiana é a moeda oficial da Índia, a quinta maior economia do mundo e uma das que apresenta o crescimento mais acelerado. Sua performance é impulsionada por um forte setor de tecnologia da informação, um mercado consumidor em expansão e investimentos em infraestrutura. A política monetária do Reserve Bank of India e a dinâmica do mercado de trabalho são cruciais para sua estabilidade.",
         "period_days": 90
     },
     "China": {
@@ -59,7 +51,7 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
         "silhouette": "https://www.pngmart.com/files/21/China-Silhoutte-PNG-HD.png",
         "color": "#DE2910", "keywords": ["China", "economia chinesa", "yuan", "comércio"],
-        "description": "O Yuan Chinês é a moeda da China, a segunda maior economia do mundo.",
+        "description": "O Yuan Chinês, ou Renminbi, é a moeda da China, a segunda maior economia do mundo e um centro vital de manufatura e comércio global. A estabilidade de sua cotação é de grande importância para o comércio internacional, e sua política cambial é gerenciada pelo Banco Popular da China. A moeda reflete tanto a força industrial do país quanto as relações comerciais com seus parceiros globais.",
         "period_days": 90
     },
     "África do Sul": {
@@ -67,7 +59,7 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg",
         "silhouette": "https://png.pngtree.com/png-clipart/20230807/original/pngtree-simple-flat-vector-illustration-of-south-africa-in-solid-black-silhouette-with-country-area-map-vector-picture-image_10081507.png",
         "color": "#007A4D", "keywords": ["África do Sul", "economia sul-africana", "rand"],
-        "description": "O Rand Sul-Africano é a moeda da África do Sul, a economia mais industrializada do continente africano.",
+        "description": "O Rand Sul-Africano é a moeda da África do Sul, a nação mais industrializada do continente. Sua cotação está intimamente ligada ao desempenho do setor de mineração, especialmente ouro e platina, e à estabilidade política interna. A moeda é um reflexo direto dos desafios e oportunidades econômicas do país, incluindo questões de emprego e infraestrutura.",
         "period_days": 90
     },
     "Argentina": {
@@ -75,15 +67,15 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg",
         "silhouette": "https://png.pngtree.com/png-clipart/20230807/original/pngtree-simple-flat-vector-illustration-of-argentinasolid-black-silhouette-map-depicting-the-countrys-area-vector-picture-image_10081545.png",
         "color": "#74ACDF", "keywords": ["Argentina", "economia argentina", "peso argentino", "crise", "inflação"],
-        "description": "O Peso Argentino é a moeda da Argentina, conhecida por sua volatilidade econômica.",
+        "description": "O Peso Argentino é a moeda oficial da Argentina, uma economia marcada por períodos de alta inflação e volatilidade. Sua cotação é um termômetro da estabilidade fiscal e das políticas do governo. O mercado cambial argentino é influenciado por fatores como a confiança dos investidores, negociações da dívida e a produção agrícola do país.",
         "period_days": 30
     },
     "Egito": {
         "moeda": "Libra Egípcia", "ticker": "EGP", "codigo": "EGP", "flag": "🇪🇬",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg",
-        "silhouette": "https://static.vecteezy.com/system/resources/previews/037/797/947/non_2x/country-map-india-free-png.png",
+        "silhouette": "https://cdn.creazilla.com/silhouettes/2560/egypt-map-silhouette-000000-md.png",
         "color": "#CE1126", "keywords": ["Egito", "economia egípcia", "libra egípcia"],
-        "description": "A Libra Egípcia é a moeda do Egito, a maior economia do mundo árabe.",
+        "description": "A Libra Egípcia é a moeda do Egito, a economia mais populosa e diversificada do mundo árabe. Sua cotação é influenciada pelo turismo, remessas de egípcios no exterior, projetos de infraestrutura e o comércio através do Canal de Suez. A estabilidade política e o apoio de organismos internacionais são cruciais para o seu desempenho no mercado cambial.",
         "period_days": 90
     },
     "Arábia Saudita": {
@@ -91,15 +83,7 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Flag_of_Saudi_Arabia.svg",
         "silhouette": "https://images.vexels.com/media/users/3/314245/isolated/preview/6945b1c55e7dacfa13d16e65f599c231-uma-silhueta-do-mapa-da-arabia-saudita.png",
         "color": "#245C36", "keywords": ["Arábia Saudita", "economia saudita", "riyal", "petróleo", "OPEP"],
-        "description": "O Riyal Saudita é a moeda da Arábia Saudita, o maior exportador de petróleo do mundo.",
-        "period_days": 90
-    },
-    "Emirados Árabes Unidos": {
-        "moeda": "Dirham", "ticker": "AED", "codigo": "AED", "flag": "🇦🇪",
-        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_United_Arab_Emirates.svg",
-        "silhouette": "https://cdn.pixabay.com/photo/2016/04/29/00/41/united-arab-emerites-1360076_1280.png",
-        "color": "#00843D", "keywords": ["Emirados Árabes Unidos", "economia dos Emirados", "dirham", "petróleo"],
-        "description": "O Dirham é a moeda dos Emirados Árabes Unidos, um dos países mais ricos do mundo.",
+        "description": "O Riyal Saudita, moeda oficial da Arábia Saudita, é um dos principais indicadores da economia do Oriente Médio. Sua cotação é indexada ao Dólar Americano, garantindo estabilidade. A economia saudita é a maior do mundo árabe e é fortemente dependente da exportação de petróleo. Mudanças na política da OPEP e nos preços globais do petróleo impactam diretamente a economia do país.",
         "period_days": 90
     },
     "Estados Unidos": {
@@ -107,7 +91,7 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
         "silhouette": "https://www.pngplay.com/wp-content/uploads/12/USA-Map-PNG-HD-Photos.png",
         "color": "#3C3B6E", "keywords": ["Estados Unidos", "economia americana", "dólar", "taxa de juros", "inflação"],
-        "description": "O Dólar Americano é a moeda de reserva global e a mais negociada no mundo.",
+        "description": "O Dólar Americano é a principal moeda de reserva global e a mais negociada no mundo. A sua cotação reflete não apenas a saúde da economia dos EUA, mas também a confiança global. Decisões do Federal Reserve (o banco central americano), dados sobre inflação e emprego, e o cenário político internacional têm um impacto direto em seu valor, afetando mercados financeiros em todo o planeta.",
         "period_days": 120
     },
     "União Europeia": {
@@ -115,7 +99,7 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg",
         "silhouette": "https://png.pngtree.com/png-clipart/20230807/original/pngtree-eu-flag-overlay-on-vector-map-of-european-union-vector-picture-image_10053056.png",
         "color": "#003399", "keywords": ["União Europeia", "euro", "economia europeia", "BCE", "inflação"],
-        "description": "O Euro é a moeda oficial da União Europeia, usado por 19 dos 27 estados-membros.",
+        "description": "O Euro é a moeda comum de 19 países da União Europeia, sendo a segunda maior moeda de reserva global. A sua cotação reflete a saúde econômica de um bloco diversificado de nações. Decisões do Banco Central Europeu (BCE), a estabilidade financeira dos países-membros e o desempenho de setores chave como indústria e serviços influenciam diretamente o valor do Euro.",
         "period_days": 120
     },
     "Japão": {
@@ -123,7 +107,7 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg",
         "silhouette": "https://static.vecteezy.com/system/resources/previews/037/797/980/non_2x/country-map-japan-free-png.png",
         "color": "#BC002D", "keywords": ["Japão", "economia japonesa", "iene", "juros negativos"],
-        "description": "O Iene Japonês é a moeda do Japão, a terceira maior economia do mundo.",
+        "description": "O Iene Japonês é a moeda do Japão, uma das economias mais desenvolvidas e tecnologicamente avançadas do mundo. A sua cotação é influenciada pela política monetária do Banco do Japão, que tem mantido taxas de juros ultra-baixas, e pelas exportações de bens de alta tecnologia. O Iene é considerado um 'porto seguro' em tempos de incerteza global, atraindo investidores.",
         "period_days": 90
     },
     "Reino Unido": {
@@ -131,9 +115,17 @@ MOEDAS_DISPONIVEIS = {
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg",
         "silhouette": "https://cdn.creazilla.com/silhouettes/2353/great-britain-silhouette-000000-xl.png",
         "color": "#012169", "keywords": ["Reino Unido", "economia britânica", "libra esterlina", "Brexit"],
-        "description": "A Libra Esterlina é a moeda do Reino Unido, uma das principais moedas de reserva do mundo.",
+        "description": "A Libra Esterlina é a moeda do Reino Unido e uma das mais importantes do mundo. A sua cotação reflete a saúde da economia britânica, que é dominada pelo setor de serviços, especialmente finanças. A política do Banco da Inglaterra e as negociações comerciais pós-Brexit continuam a ter um grande impacto sobre o seu valor no mercado internacional.",
         "period_days": 90
-    }
+    },
+    "Emirados Árabes Unidos": {
+        "moeda": "Dirham", "ticker": "AED", "codigo": "AED", "flag": "🇦🇪",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_United_Arab_Emirates.svg",
+        "silhouette": "https://cdn.pixabay.com/photo/2016/04/29/00/41/united-arab-emerites-1360076_1280.png",
+        "color": "#00843D", "keywords": ["Emirados Árabes Unidos", "economia dos Emirados", "dirham", "petróleo"],
+        "description": "O Dirham dos Emirados Árabes Unidos é uma moeda estável, que também é atrelada ao Dólar Americano. Sua estabilidade é um pilar para o crescimento da economia do país, que se diversificou para além do petróleo e inclui setores como turismo, finanças e tecnologia. O Dirham reflete a força econômica dos Emirados, um polo de negócios e inovação na região.",
+        "period_days": 90
+    },
 }
 
 # =========================================================================================
