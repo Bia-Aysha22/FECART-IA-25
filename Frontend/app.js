@@ -90,58 +90,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Renderizar análise
     const renderAnalysis = (data) => {
         const info = data.country_info;
-
+    
         // Análse do País
         const countryDescriptionElement = document.getElementById('country-analysis-content').querySelector('p');
         countryDescriptionElement.textContent = data.country_info.description;
         const keywordsElement = document.getElementById('country-analysis-content').querySelector('.keywords-text');
         keywordsElement.textContent = data.country_info.keywords.join(', ');
-
+    
         // Atualizar elementos da página
         document.getElementById('currency-title').textContent = `${info.name} - ${info.moeda}`;
         document.getElementById('reliability-text').textContent = `Confiabilidade do modelo: ${data.reliability}%`;
         document.getElementById('country-flag').src = info.flag_img;
         document.getElementById('country-silhouette').src = info.silhouette;
-
+    
         // Atualizar taxas
         document.getElementById('last-rate').textContent = data.last_rate.toFixed(4);
         document.getElementById('predicted-rate').textContent = data.predicted_rate_1m.toFixed(4);
         document.getElementById('predicted-rate-3months').textContent = data.predicted_rate_3m.toFixed(4);
         document.getElementById('predicted-rate-6months').textContent = data.predicted_rate_6m.toFixed(4);
-
+    
         // Variação percentual
         const changePercent = document.getElementById('change-percent');
         changePercent.textContent = `${data.change >= 0 ? '+' : ''}${data.change.toFixed(2)}%`;
         changePercent.className = `text-2xl font-bold ${data.change >= 0 ? 'text-green-900' : 'text-red-900'}`;
-
+    
         // Barra de confiabilidade
         const reliabilityBar = document.getElementById('reliability-bar');
         reliabilityBar.style.width = `${data.reliability}%`;
         reliabilityBar.className = `h-full transition-all duration-1000 ${getReliabilityColor(data.reliability)}`;
-
+    
         document.getElementById('reliability-percent').textContent = `${data.reliability}%`;
-
+    
         // Nível de risco
-        const riskLevel = document.getElementById('risk-level-text');
-        riskLevel.textContent = data.risk_level;
-        riskLevel.className = `font-semibold ${getRiskColor(data.risk_level)}`;
-
+        const riskLevelElement = document.getElementById('risk-level');
+        const riskIndicatorBar = document.getElementById('risk-indicator-bar');
+    
+        riskLevelElement.textContent = data.risk_level;
+        riskLevelElement.className = `font-bold ${getRiskColor(data.risk_level)}`;
+    
+        // Define a largura da barra de risco com base no nível
+        let barWidth = 0;
+        let barColorClass = '';
+        if (data.risk_level === 'Baixo') {
+            barWidth = '33%';
+            barColorClass = 'bg-green-500';
+        } else if (data.risk_level === 'Médio') {
+            barWidth = '66%';
+            barColorClass = 'bg-yellow-500';
+        } else {
+            barWidth = '100%';
+            barColorClass = 'bg-red-500';
+        }
+    
+        // Remove todas as classes de cor e aplica a nova
+        riskIndicatorBar.classList.remove('bg-green-500', 'bg-yellow-500', 'bg-red-500');
+        riskIndicatorBar.classList.add(barColorClass);
+        riskIndicatorBar.style.width = barWidth;
+    
         // Renderizar gráfico
         renderChart(data.historical_data, info, data);
         
         // Renderizar notícias
         renderNews(data.news);
-
+    
         // Atualizar datas
         const today = new Date();
         document.getElementById('last-date').textContent = formatDate(today);
         document.getElementById('prediction-date').textContent = formatDate(addDays(today, 30));
         document.getElementById('prediction-date-3months').textContent = formatDate(addDays(today, 90));
         document.getElementById('prediction-date-6months').textContent = formatDate(addDays(today, 180));
-        document.getElementById('risk-updated-text').textContent = `Última atualização: ${formatDateTime(today)}`;
     };
     
     // Renderizar notícias

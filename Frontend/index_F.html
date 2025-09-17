@@ -111,7 +111,7 @@
                 Selecione a Moeda para Análise
             </h2>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" id="currency-cards">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4" id="currency-cards">
                 </div>
         </section>
 
@@ -135,7 +135,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="bg-gray-50 rounded-lg p-4 mb-6">
                 <div class="flex justify-center mb-4">
                     <div class="inline-flex rounded-md shadow-sm">
@@ -200,66 +200,18 @@
                     <p class="text-2xl font-bold text-purple-900" id="change-percent">+1.48%</p>
                     <p class="text-xs text-purple-600">Em relação à última cotação</p>
                 </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                    <i class="fas fa-exclamation-triangle mr-3 text-red-500"></i>
-                    Fatores de Risco Atuais
-                </h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <div id="risk-factors-content">
-                            <div class="mb-4">
-                                <h4 class="font-semibold text-gray-700 mb-2">Econômicos:</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm risk-tag">
-                                        Alta dos juros nos EUA
-                                    </span>
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm risk-tag">
-                                        Oscilação no preço do petróleo
-                                    </span>
-                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm risk-tag">
-                                        Crescimento do comércio BRICS+
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <h4 class="font-semibold text-gray-700 mb-2">Políticos:</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm risk-tag">
-                                        Tensões geopolíticas
-                                    </span>
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm risk-tag">
-                                        Eleições na África do Sul
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <h4 class="font-semibold text-gray-700 mb-2">Mercado:</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm risk-tag">
-                                        Volatilidade do dólar
-                                    </span>
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm risk-tag">
-                                        Demanda por commodities
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-yellow-50 rounded-lg p-4 border-l-4 border-yellow-500 mt-4">
-                            <h3 class="font-medium text-yellow-800 mb-2">Nível de Risco Atual:</h3>
-                            <div class="flex items-center">
-                                <div id="risk-level-indicator" class="w-full h-2 bg-gray-200 rounded-full mr-4 overflow-hidden">
-                                    <div id="risk-level-bar" class="h-full transition-all duration-1000" style="width: 0%"></div>
-                                </div>
-                                <span id="risk-level-text" class="font-semibold text-yellow-800">Carregando...</span>
-                            </div>
-                            <p class="text-sm text-yellow-600 mt-2" id="risk-updated-text">Última atualização: -</p>
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-gray-700 mb-2">Nível de Risco:</h4>
+                    <div class="flex items-center gap-2">
+                        <span id="risk-level" class="font-bold text-gray-600">--</span>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2.5">
+                            <div id="risk-indicator-bar" class="h-full rounded-full transition-all duration-1000"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+
 
                     <div class="bg-gray-50 rounded-lg p-4">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
