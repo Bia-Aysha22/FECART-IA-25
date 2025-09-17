@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const analysisSection = document.getElementById('analysis-section');
     const loadingIndicator = document.getElementById('loading-indicator');
     const loadingText = document.getElementById('loading-text');
+    const newsContainer = document.getElementById('news-articles');
 
     let myChart;
     let currentCountry = '';
@@ -130,6 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Renderizar gráfico
         renderChart(data.historical_data, info, data);
+        
+        // Renderizar notícias
+        renderNews(data.news);
 
         // Atualizar datas
         const today = new Date();
@@ -139,9 +143,33 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('prediction-date-6months').textContent = formatDate(addDays(today, 180));
         document.getElementById('risk-updated-text').textContent = `Última atualização: ${formatDateTime(today)}`;
     };
+    
+    // Renderizar notícias
+    const renderNews = (newsData) => {
+        if (!newsContainer) return;
+        
+        newsContainer.innerHTML = '';
+        if (newsData.length === 0) {
+            newsContainer.innerHTML = '<p class="text-gray-500 text-center">Nenhuma notícia recente encontrada.</p>';
+            return;
+        }
 
-// Renderizar gráfico
-const renderChart = (historicalData, countryInfo, data) => {
+        newsData.forEach(article => {
+            const articleDiv = document.createElement('a');
+            articleDiv.href = article.url;
+            articleDiv.target = "_blank";
+            articleDiv.className = "bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 block";
+            articleDiv.innerHTML = `
+                <h4 class="font-bold text-gray-800 mb-1">${article.title}</h4>
+                <p class="text-sm text-gray-600 mb-2">${article.description}</p>
+                <p class="text-xs text-blue-500 hover:underline">Leia mais</p>
+            `;
+            newsContainer.appendChild(articleDiv);
+        });
+    };
+
+    // Renderizar gráfico
+    const renderChart = (historicalData, countryInfo, data) => {
         const ctx = document.getElementById('currency-chart').getContext('2d');
 
         if (myChart) {

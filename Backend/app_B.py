@@ -164,11 +164,11 @@ def fetch_currency_data(from_ticker, to_ticker, days):
 def analyze_sentiment_from_news(keywords):
     """
     Busca notícias e realiza uma análise de sentimento simples.
-    Retorna uma pontuação entre -1 e 1 e um rótulo.
+    Retorna uma pontuação entre -1 e 1, um rótulo e a lista de artigos.
     """
     if not NEWS_API_KEY or NEWS_API_KEY == "SUA_CHAVE_AQUI":
         print("Aviso: Chave de API de notícias não configurada. A análise de sentimento será ignorada.")
-        return 0, "Neutro"
+        return 0, "Neutro", []
 
     query = ' OR '.join(keywords)
     url = f'https://newsapi.org/v2/everything?q={query}&language=pt&sortBy=relevancy&apiKey={NEWS_API_KEY}'
@@ -179,10 +179,10 @@ def analyze_sentiment_from_news(keywords):
     try:
         response = requests.get(url, verify=False)
         data = response.json()
-        articles = data.get('articles', [])
-
+        articles = data.get('articles', [])[:5] # Limita a 5 notícias
+        
         if not articles:
-            return 0, "Neutro"
+            return 0, "Neutro", []
 
         positive_count = 0
         negative_count = 0
@@ -197,7 +197,7 @@ def analyze_sentiment_from_news(keywords):
         total_count = positive_count + negative_count
 
         if total_count == 0:
-            return 0, "Neutro"
+            return 0, "Neutro", articles
 
         sentiment_score = (positive_count - negative_count) / total_count
 
@@ -208,10 +208,10 @@ def analyze_sentiment_from_news(keywords):
         else:
             sentiment_label = "Neutro"
 
-        return sentiment_score, sentiment_label
+        return sentiment_score, sentiment_label, articles
     except Exception as e:
         print(f"Erro ao buscar notícias: {e}")
-        return 0, "Neutro"
+        return 0, "Neutro", []
 
 # =========================================================================================
 # === MODELOS DE PREVISÃO ENSEMBLE ========================================================
@@ -324,8 +324,8 @@ def analyze_currency():
     if not historical_data:
         return jsonify({'error': 'Não foi possível obter dados da moeda'}), 500
 
-    # Executa a análise de notícias
-    sentiment_score, sentiment_label = analyze_sentiment_from_news(moeda_info['keywords'])
+    # Executa a análise de notícias e armazena os artigos retornados
+    sentiment_score, sentiment_label, news_articles = analyze_sentiment_from_news(moeda_info['keywords'])
 
     # Calcula a previsão para 1, 3 e 6 meses
     predicted_rate_1m, reliability, risk_level = calculate_ensemble_prediction(historical_data[-90:], sentiment_score, 30)
@@ -347,7 +347,8 @@ def analyze_currency():
         'risk_level': risk_level,
         'sentiment_label': sentiment_label,
         'historical_data': historical_data[-30:],
-        'today': datetime.now().isoformat()
+        'today': datetime.now().isoformat(),
+        'news': news_articles # Adiciona a lista de notícias à resposta
     }
     return jsonify(response)
 
