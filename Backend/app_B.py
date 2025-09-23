@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import requests
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 import ssl
 import certifi
 import os
@@ -26,7 +26,11 @@ else:
 # === CONFIGURAÇÃO DE CHAVES DE API =======================================================
 # =========================================================================================
 # NOTA: A AwesomeAPI não exige uma chave de API para as consultas gratuitas.
-NEWS_API_KEY = "579cf0d4f8be4534a96cfa001c58d315"
+# A NewsAPI, por sua vez, exige uma chave. Você pode adicionar mais chaves aqui.
+NEWS_API_KEYS = [
+    "579cf0d4f8be4534a96cfa001c58d315",
+    "42656565682945dc9cb3d46235d88281"
+]
 
 # Mapeamento de moedas para os tickers da AwesomeAPI e informações completas
 MOEDAS_DISPONIVEIS = {
@@ -74,8 +78,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Libra Egípcia", "ticker": "EGP", "codigo": "EGP", "flag": "🇪🇬",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg",
         "silhouette": "https://cdn.creazilla.com/silhouettes/2560/egypt-map-silhouette-000000-md.png",
-        "color": "#CE1126", "keywords": ["Egito", "economia egípcia", "libra egípcia"],
-        "description": "A Libra Egípcia é a moeda do Egito, a economia mais populosa e diversificada do mundo árabe. Sua cotação é influenciada pelo turismo, remessas de egípcios no exterior, projetos de infraestrutura e o comércio através do Canal de Suez. A estabilidade política e o apoio de organismos internacionais são cruciais para o seu desempenho no mercado cambial.",
+        "color": "#C8102E", "keywords": ["Egito", "economia egípcia", "libra egípcia"],
+        "description": "A Libra Egípcia é a moeda do Egito, uma economia que lida com desafios fiscais e a dependência do turismo, das remessas de egípcios no exterior e da receita do Canal de Suez. A sua cotação é afetada por medidas de política econômica, como a flutuação controlada do câmbio, e por tensões geopolíticas regionais.",
         "period_days": 90
     },
     "Arábia Saudita": {
@@ -166,52 +170,45 @@ def analyze_sentiment_from_news(keywords):
     Busca notícias e realiza uma análise de sentimento simples.
     Retorna uma pontuação entre -1 e 1, um rótulo e a lista de artigos.
     """
-    if not NEWS_API_KEY or NEWS_API_KEY == "SUA_CHAVE_AQUI":
-        print("Aviso: Chave de API de notícias não configurada. A análise de sentimento será ignorada.")
-        return 0, "Neutro", []
+    for api_key in NEWS_API_KEYS:
+        query = ' OR '.join(keywords)
+        url = f'https://newsapi.org/v2/everything?q={query}&language=pt&sortBy=relevancy&apiKey={api_key}'
+        try:
+            response = requests.get(url)
+            data = response.json()
+            if data["status"] == "ok":
+                articles = data.get('articles', [])[:5] # Limita a 5 notícias
 
-    query = ' OR '.join(keywords)
-    url = f'https://newsapi.org/v2/everything?q={query}&language=pt&sortBy=relevancy&apiKey={NEWS_API_KEY}'
+                positive_words = ["alta", "crescimento", "valorização", "forte", "ganhos", "recuperação", "superou", "aumento", "expansão", "recorde", "estabilidade", "avanço"]
+                negative_words = ["queda", "perda", "desvalorização", "fraca", "baixa", "recuo", "diminuição", "instabilidade", "crise", "recessão", "tensão", "déficit"]
 
-    positive_words = ["alta", "crescimento", "valorização", "forte", "ganhos", "recuperação", "superou", "aumento", "expansão", "recorde", "estabilidade", "avanço"]
-    negative_words = ["queda", "perda", "desvalorização", "fraca", "baixa", "recuo", "diminuição", "instabilidade", "crise", "recessão", "tensão", "déficit"]
+                positive_count = 0
+                negative_count = 0
+                for article in articles:
+                    content = (article.get('title', '') + ' ' + article.get('description', '')).lower()
+                    if any(word in content for word in positive_words):
+                        positive_count += 1
+                    if any(word in content for word in negative_words):
+                        negative_count += 1
 
-    try:
-        response = requests.get(url, verify=False)
-        data = response.json()
-        articles = data.get('articles', [])[:5] # Limita a 5 notícias
-        
-        if not articles:
-            return 0, "Neutro", []
+                total_count = positive_count + negative_count
+                if total_count == 0:
+                    return 0, "Neutro", articles
 
-        positive_count = 0
-        negative_count = 0
+                sentiment_score = (positive_count - negative_count) / total_count
+                if sentiment_score > 0.1:
+                    sentiment_label = "Positivo"
+                elif sentiment_score < -0.1:
+                    sentiment_label = "Negativo"
+                else:
+                    sentiment_label = "Neutro"
 
-        for article in articles:
-            content = (article.get('title', '') + ' ' + article.get('description', '')).lower()
-            if any(word in content for word in positive_words):
-                positive_count += 1
-            if any(word in content for word in negative_words):
-                negative_count += 1
-
-        total_count = positive_count + negative_count
-
-        if total_count == 0:
-            return 0, "Neutro", articles
-
-        sentiment_score = (positive_count - negative_count) / total_count
-
-        if sentiment_score > 0.1:
-            sentiment_label = "Positivo"
-        elif sentiment_score < -0.1:
-            sentiment_label = "Negativo"
-        else:
-            sentiment_label = "Neutro"
-
-        return sentiment_score, sentiment_label, articles
-    except Exception as e:
-        print(f"Erro ao buscar notícias: {e}")
-        return 0, "Neutro", []
+                return sentiment_score, sentiment_label, articles
+            else:
+                print(f"Erro com a chave {api_key}: {data.get('message', 'Erro desconhecido')}")
+        except requests.exceptions.RequestException as e:
+            print(f"Erro de requisição com a chave {api_key}: {e}")
+    return 0, "Neutro", []
 
 # =========================================================================================
 # === MODELOS DE PREVISÃO ENSEMBLE ========================================================
@@ -318,13 +315,12 @@ def analyze_currency():
 
     moeda_info = MOEDAS_DISPONIVEIS[country]
 
-    # Busca dados da moeda usando a AwesomeAPI, sempre com 180 dias de histórico
     last_rate, historical_data = fetch_currency_data(moeda_info['ticker'], "BRL", 180)
 
     if not historical_data:
         return jsonify({'error': 'Não foi possível obter dados da moeda'}), 500
 
-    # Executa a análise de notícias e armazena os artigos retornados
+    # Realiza análise de sentimento das notícias e armazena os artigos retornados
     sentiment_score, sentiment_label, news_articles = analyze_sentiment_from_news(moeda_info['keywords'])
 
     # Calcula a previsão para 1, 3 e 6 meses
