@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FECART 2025 - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .slideshow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      display: flex;
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1s ease-in-out;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-900 text-white">
+
+  <!-- Container do slideshow -->
+  <div class="slideshow-container" id="slideshow"></div>
+
+  <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+
+  <!-- Conteúdo central -->
+  <div class="text-center relative z-10">
+    <h1 class="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">FECART 2025</h1>
+    <p class="text-lg md:text-2xl mb-8 drop-shadow-md">Sistema de Previsão de Moedas BRICS+</p>
+    <a href="index_F.html"
+       class="bg-white text-blue-800 px-8 py-3 rounded-lg shadow-lg font-semibold text-lg hover:bg-gray-200 transition">
+      Pesquisar Moedas
+    </a>
+  </div>
+
+  <script>
+    // Lista de imagens
+    const imagens = [
+      "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
+      "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/0/0d/Flag_of_Saudi_Arabia.svg",
+      "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg",
+      "https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg",
+      "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg",
+      "https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_United_Arab_Emirates.svg"
+    ];
+
+    const slideshow = document.getElementById("slideshow");
+
+    let currentIndex = 0;
+
+    // Inicializa com 2 imagens (atual e próxima)
+    function inicializarSlides() {
+      const img1 = document.createElement("div");
+      img1.className = "slide";
+      img1.style.backgroundImage = `url('${imagens[currentIndex]}')`;
+      slideshow.appendChild(img1);
+
+      const nextIndex = (currentIndex + 1) % imagens.length;
+      const img2 = document.createElement("div");
+      img2.className = "slide";
+      img2.style.backgroundImage = `url('${imagens[nextIndex]}')`;
+      slideshow.appendChild(img2);
+    }
+
+    // Troca as imagens com efeito de deslize
+    function trocarSlide() {
+      const slides = document.querySelectorAll(".slide");
+
+      // Move o container para a esquerda
+      slideshow.style.transform = "translateX(-100%)";
+
+      setTimeout(() => {
+        // Remove a primeira imagem (já saiu da tela)
+        slideshow.removeChild(slides[0]);
+
+        // Reseta posição para mostrar a nova imagem à direita
+        slideshow.style.transition = "none";
+        slideshow.style.transform = "translateX(0)";
+
+        // Adiciona uma nova imagem aleatória
+        const novaImagem = document.createElement("div");
+        novaImagem.className = "slide";
+        const aleatoria = imagens[Math.floor(Math.random() * imagens.length)];
+        novaImagem.style.backgroundImage = `url('${aleatoria}')`;
+        slideshow.appendChild(novaImagem);
+
+        // Força reflow para a transição funcionar na próxima
+        void slideshow.offsetWidth;
+        slideshow.style.transition = "transform 1s ease-in-out";
+      }, 1000);
+    }
+
+    inicializarSlides();
+    setInterval(trocarSlide, 3000);
+  </script>
+
+</body>
+</html>
