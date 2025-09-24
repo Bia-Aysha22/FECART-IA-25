@@ -146,7 +146,7 @@ MOEDAS_DISPONIVEIS = {
     "Canadá": {
         "moeda": "Dólar Canadense", "ticker": "CAD", "codigo": "CAD", "flag": "🇨🇦",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg",
-        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Canada_%28orthographic_projection%29.svg",
+        "silhouette": "https://cdn.creazilla.com/silhouettes/2787/canada-map-silhouette-000000-lg.png",
         "color": "#D41E38",
         "keywords": ["Dólar Canadense", "economia Canadá", "juros Canadá", "inflação Canadá"],
         "description": "O Dólar Canadense é a moeda do Canadá, uma economia desenvolvida e rica em recursos naturais, como petróleo e minerais.",
@@ -154,8 +154,8 @@ MOEDAS_DISPONIVEIS = {
     },
     "Austrália": {
         "moeda": "Dólar Australiano", "ticker": "AUD", "codigo": "AUD", "flag": "🇦🇺",
-        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/8/87/Flag_of_Australia_%28converted%29.svg",
-        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Australia_%28orthographic_projection%29.svg",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Australia.svg",
+        "silhouette": "https://www.mappng.com/png-country-maps/2021-06-30157australia-map-black.png",
         "color": "#00008B",
         "keywords": ["Dólar Australiano", "economia Austrália", "juros Austrália", "inflação Austrália"],
         "description": "O Dólar Australiano é a moeda da Austrália, uma economia robusta e diversificada, com destaque para a mineração e o setor de serviços.",
@@ -163,8 +163,8 @@ MOEDAS_DISPONIVEIS = {
     },
     "Suíça": {
         "moeda": "Franco Suíço", "ticker": "CHF", "codigo": "CHF", "flag": "🇨🇭",
-        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/0/08/Flag_of_Switzerland.svg",
-        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Switzerland_%28orthographic_projection%29.svg",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Flag_of_Switzerland_%28Pantone%29.svg/1200px-Flag_of_Switzerland_%28Pantone%29.svg.png",
+        "silhouette": "https://static.vecteezy.com/system/resources/previews/067/937/579/non_2x/switzerland-map-silhouette-icon-isolated-on-transparent-background-free-png.png",
         "color": "#FF0000",
         "keywords": ["Franco Suíço", "economia Suíça", "juros Suíça", "inflação Suíça"],
         "description": "O Franco Suíço é a moeda da Suíça, conhecida por sua economia estável e sistema financeiro seguro, sendo um porto seguro para investidores.",
@@ -173,7 +173,7 @@ MOEDAS_DISPONIVEIS = {
     "México": {
         "moeda": "Peso Mexicano", "ticker": "MXN", "codigo": "MXN", "flag": "🇲🇽",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Flag_of_Mexico.svg",
-        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Mexico_%28orthographic_projection%29.svg",
+        "silhouette": "https://cdn.creazilla.com/silhouettes/1819/mexico-map-silhouette-000000-lg.png",
         "color": "#006847",
         "keywords": ["Peso Mexicano", "economia México", "juros México", "inflação México"],
         "description": "O Peso Mexicano é a moeda oficial do México, uma economia emergente com fortes laços comerciais com os Estados Unidos.",
@@ -182,7 +182,7 @@ MOEDAS_DISPONIVEIS = {
     "Turquia": {
         "moeda": "Lira Turca", "ticker": "TRY", "codigo": "TRY", "flag": "🇹🇷",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg",
-        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Turkey_%28orthographic_projection%29.svg",
+        "silhouette": "https://exposetobacco.org/wp-content/uploads/Turkey-2.png",
         "color": "#E30A17",
         "keywords": ["Lira Turca", "economia Turquia", "juros Turquia", "inflação Turquia"],
         "description": "A Lira Turca é a moeda da Turquia, uma economia em transição, com desafios recentes de inflação e estabilidade.",
@@ -191,7 +191,7 @@ MOEDAS_DISPONIVEIS = {
     "Coreia do Sul": {
         "moeda": "Won Sul-Coreano", "ticker": "KRW", "codigo": "KRW", "flag": "🇰🇷",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg",
-        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/e/ea/South_Korea_%28orthographic_projection%29.svg",
+        "silhouette": "https://png.pngtree.com/png-clipart/20230810/original/pngtree-map-of-south-korea-icon-black-color-south-east-silhouette-vector-picture-image_10241716.png",
         "color": "#0047A0",
         "keywords": ["Won Sul-Coreano", "economia Coreia do Sul", "juros Coreia do Sul", "inflação Coreia do Sul"],
         "description": "O Won Sul-Coreano é a moeda da Coreia do Sul, uma das maiores economias asiáticas, líder em tecnologia e inovação.",
@@ -243,7 +243,6 @@ MOEDAS_DISPONIVEIS = {
         "period_days": 180
     }
 }
-
 # Países que realmente fazem parte do BRICS (membros oficiais)
 BRICS_MEMBERS = ["Brasil", "Rússia", "Índia", "China", "África do Sul"]
 
@@ -280,51 +279,94 @@ def fetch_currency_data(from_ticker, to_ticker, days):
         print(f"Erro ao buscar dados da AwesomeAPI: {e}")
         return None, None
 
+
 def analyze_sentiment_from_news(keywords):
-    """
-    Busca notícias e realiza uma análise de sentimento simples.
-    Retorna uma pontuação entre -1 e 1, um rótulo e a lista de artigos.
-    """
+    """Busca notícias e realiza uma análise de sentimento simples."""
+    print(f"Buscando notícias para palavras-chave: {keywords}")
+
     for api_key in NEWS_API_KEYS:
         query = ' OR '.join(keywords)
         url = f'https://newsapi.org/v2/everything?q={query}&language=pt&sortBy=relevancy&apiKey={api_key}'
+
+        print(f"Tentando chave: {api_key[:10]}...")
+
         try:
-            response = requests.get(url)
+            # Usar verificação SSL com certificados confiáveis
+            response = requests.get(
+                url,
+                verify=certifi.where(),  # Usar certificados confiáveis
+                timeout=10
+            )
+
             data = response.json()
-            if data["status"] == "ok":
-                articles = data.get('articles', [])[:5] # Limita a 5 notícias
+            print(f"Status da resposta: {data.get('status')}")
 
-                positive_words = ["alta", "crescimento", "valorização", "forte", "ganhos", "recuperação", "superou", "aumento", "expansão", "recorde", "estabilidade", "avanço"]
-                negative_words = ["queda", "perda", "desvalorização", "fraca", "baixa", "recuo", "diminuição", "instabilidade", "crise", "recessão", "tensão", "déficit"]
+            if data.get("status") == "ok":
+                articles = data.get('articles', [])[:5]
+                print(f"✅ Artigos encontrados: {len(articles)}")
 
-                positive_count = 0
-                negative_count = 0
-                for article in articles:
-                    content = (article.get('title', '') + ' ' + article.get('description', '')).lower()
-                    if any(word in content for word in positive_words):
-                        positive_count += 1
-                    if any(word in content for word in negative_words):
-                        negative_count += 1
-
-                total_count = positive_count + negative_count
-                if total_count == 0:
-                    return 0, "Neutro", articles
-
-                sentiment_score = (positive_count - negative_count) / total_count
-                if sentiment_score > 0.1:
-                    sentiment_label = "Positivo"
-                elif sentiment_score < -0.1:
-                    sentiment_label = "Negativo"
+                if articles:
+                    return process_sentiment(articles)
                 else:
-                    sentiment_label = "Neutro"
+                    print("⚠️ Nenhum artigo encontrado")
+                    continue
 
-                return sentiment_score, sentiment_label, articles
             else:
-                print(f"Erro com a chave {api_key}: {data.get('message', 'Erro desconhecido')}")
-        except requests.exceptions.RequestException as e:
-            print(f"Erro de requisição com a chave {api_key}: {e}")
+                error_message = data.get('message', 'Erro desconhecido')
+                print(f"❌ Erro com a chave {api_key[:10]}...: {error_message}")
+                continue
+
+        except requests.exceptions.SSLError as ssl_error:
+            print(f"❌ Erro SSL com a chave {api_key[:10]}...: {ssl_error}")
+            # Tentar sem verificação SSL como fallback
+            try:
+                response = requests.get(url, verify=False, timeout=10)
+                data = response.json()
+
+                if data.get("status") == "ok":
+                    articles = data.get('articles', [])[:5]
+                    print(f"✅ Artigos encontrados (SSL ignorado): {len(articles)}")
+                    return process_sentiment(articles)
+
+            except Exception as fallback_error:
+                print(f"❌ Fallback também falhou: {fallback_error}")
+                continue
+
+        except Exception as e:
+            print(f"❌ Erro geral com a chave {api_key[:10]}...: {str(e)}")
+            continue
+
+    print("❌ Todas as chaves falharam, retornando neutro")
     return 0, "Neutro", []
 
+def process_sentiment(articles):
+    """Processa os artigos para análise de sentimento."""
+    positive_words = ["alta", "crescimento", "valorização", "forte", "ganhos", "recuperação", "superou", "aumento", "expansão", "recorde", "estabilidade", "avanço"]
+    negative_words = ["queda", "perda", "desvalorização", "fraca", "baixa", "recuo", "diminuição", "instabilidade", "crise", "recessão", "tensão", "déficit"]
+
+    positive_count = 0
+    negative_count = 0
+
+    for article in articles:
+        content = (article.get('title', '') + ' ' + article.get('description', '')).lower()
+        if any(word in content for word in positive_words):
+            positive_count += 1
+        if any(word in content for word in negative_words):
+            negative_count += 1
+
+    total_count = positive_count + negative_count
+    if total_count == 0:
+        return 0, "Neutro", articles
+
+    sentiment_score = (positive_count - negative_count) / total_count
+    if sentiment_score > 0.1:
+        sentiment_label = "Positivo"
+    elif sentiment_score < -0.1:
+        sentiment_label = "Negativo"
+    else:
+        sentiment_label = "Neutro"
+
+    return sentiment_score, sentiment_label, articles
 # =========================================================================================
 # === MODELOS DE PREVISÃO ENSEMBLE ========================================================
 # =========================================================================================
