@@ -149,7 +149,7 @@ MOEDAS_DISPONIVEIS = {
         "silhouette": "https://cdn.creazilla.com/silhouettes/2787/canada-map-silhouette-000000-lg.png",
         "color": "#D41E38",
         "keywords": ["Dólar Canadense", "economia Canadá", "juros Canadá", "inflação Canadá"],
-        "description": "O Dólar Canadense é a moeda do Canadá, uma economia desenvolvida e rica em recursos naturais, como petróleo e minerais.",
+        "description": "O Dólar Canadense é a moeda do Canadá, uma economia desenvolvida e rica em recursos naturais como petróleo, gás natural e minerais. Sua cotação é conhecida por sua forte correlação com os preços globais das commodities e com o desempenho econômico de seu principal parceiro comercial, os Estados Unidos. A política do Banco do Canadá, focada em manter a estabilidade de preços, é um fator chave para o seu valor.",
         "period_days": 90
     },
     "Austrália": {
@@ -158,7 +158,7 @@ MOEDAS_DISPONIVEIS = {
         "silhouette": "https://www.mappng.com/png-country-maps/2021-06-30157australia-map-black.png",
         "color": "#00008B",
         "keywords": ["Dólar Australiano", "economia Austrália", "juros Austrália", "inflação Austrália"],
-        "description": "O Dólar Australiano é a moeda da Austrália, uma economia robusta e diversificada, com destaque para a mineração e o setor de serviços.",
+        "description": "O Dólar Australiano é a moeda da Austrália, uma economia robusta e diversificada, com destaque para a mineração e o setor de serviços. Conhecida como uma 'moeda de commodity', o AUD é sensível às flutuações nos preços globais de minério de ferro e carvão. Sua cotação também reflete a saúde da economia chinesa, seu maior parceiro comercial, e as decisões de política monetária do Reserve Bank of Australia.",
         "period_days": 90
     },
     "Suíça": {
@@ -167,7 +167,7 @@ MOEDAS_DISPONIVEIS = {
         "silhouette": "https://static.vecteezy.com/system/resources/previews/067/937/579/non_2x/switzerland-map-silhouette-icon-isolated-on-transparent-background-free-png.png",
         "color": "#FF0000",
         "keywords": ["Franco Suíço", "economia Suíça", "juros Suíça", "inflação Suíça"],
-        "description": "O Franco Suíço é a moeda da Suíça, conhecida por sua economia estável e sistema financeiro seguro, sendo um porto seguro para investidores.",
+        "description": "O Franco Suíço é a moeda da Suíça, reconhecida globalmente por sua estabilidade e por seu status de 'porto seguro' em tempos de incerteza geopolítica ou econômica. A Suíça possui um sistema financeiro robusto, uma política de neutralidade e um histórico de baixa inflação, o que faz do Franco uma escolha popular para investidores em busca de segurança. A política do Banco Nacional Suíço é crucial para gerir seu valor.",
         "period_days": 90
     },
     "México": {
@@ -176,7 +176,7 @@ MOEDAS_DISPONIVEIS = {
         "silhouette": "https://cdn.creazilla.com/silhouettes/1819/mexico-map-silhouette-000000-lg.png",
         "color": "#006847",
         "keywords": ["Peso Mexicano", "economia México", "juros México", "inflação México"],
-        "description": "O Peso Mexicano é a moeda oficial do México, uma economia emergente com fortes laços comerciais com os Estados Unidos.",
+        "description": "O Peso Mexicano é a moeda oficial do México, uma economia emergente com fortes laços comerciais com os Estados Unidos. Sua cotação é sensível a eventos econômicos e políticos na América do Norte, especialmente a negociação de acordos comerciais e a política de imigração. A política monetária do Banco de México e os preços do petróleo também são fatores importantes para sua estabilidade.",
         "period_days": 90
     },
     "Turquia": {
@@ -185,7 +185,7 @@ MOEDAS_DISPONIVEIS = {
         "silhouette": "https://exposetobacco.org/wp-content/uploads/Turkey-2.png",
         "color": "#E30A17",
         "keywords": ["Lira Turca", "economia Turquia", "juros Turquia", "inflação Turquia"],
-        "description": "A Lira Turca é a moeda da Turquia, uma economia em transição, com desafios recentes de inflação e estabilidade.",
+        "description": "A Lira Turca é a moeda da Turquia, uma economia em transição com desafios significativos de inflação e volatilidade. Sua cotação reflete as incertezas políticas internas, as decisões de política monetária e as tensões geopolíticas na região. A gestão da Lira pelo Banco Central da República da Turquia é um ponto focal para investidores e analistas, dada a sua influência na economia do país.",
         "period_days": 90
     },
     "Coreia do Sul": {
@@ -194,52 +194,51 @@ MOEDAS_DISPONIVEIS = {
         "silhouette": "https://png.pngtree.com/png-clipart/20230810/original/pngtree-map-of-south-korea-icon-black-color-south-east-silhouette-vector-picture-image_10241716.png",
         "color": "#0047A0",
         "keywords": ["Won Sul-Coreano", "economia Coreia do Sul", "juros Coreia do Sul", "inflação Coreia do Sul"],
-        "description": "O Won Sul-Coreano é a moeda da Coreia do Sul, uma das maiores economias asiáticas, líder em tecnologia e inovação.",
-        "period_days": 90
-    },
-    "Noruega": {
-        "moeda": "Coroa Norueguesa", "ticker": "NOK", "codigo": "NOK", "flag": "🇳🇴",
-        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg",
-        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Norway_%28orthographic_projection%29.svg",
-        "color": "#BA0C2F",
-        "keywords": ["Coroa Norueguesa", "economia Noruega", "juros Noruega", "inflação Noruega"],
-        "description": "A Coroa Norueguesa é a moeda da Noruega, uma economia forte e estável, impulsionada por vastas reservas de petróleo e gás natural.",
+        "description": "O Won Sul-Coreano é a moeda da Coreia do Sul, uma das maiores economias asiáticas, líder em tecnologia, eletrônicos e semicondutores. A sua cotação é um termômetro para o comércio global e a confiança dos investidores em economias de exportação. Eventos geopolíticos na Península Coreana e a dinâmica da economia chinesa têm um impacto direto no valor do Won.",
         "period_days": 90
     },
     "Suécia": {
         "moeda": "Coroa Sueca", "ticker": "SEK", "codigo": "SEK", "flag": "🇸🇪",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg",
-        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/3/30/Sweden_%28orthographic_projection%29.svg",
+        "silhouette": "https://storage.needpix.com/rsynced_images/sweden-35134_1280.png",
         "color": "#FECC01",
         "keywords": ["Coroa Sueca", "economia Suécia", "juros Suécia", "inflação Suécia"],
-        "description": "A Coroa Sueca é a moeda da Suécia, uma economia desenvolvida com foco em inovação, exportação de bens de alta tecnologia e serviços.",
+        "description": "A Coroa Sueca é a moeda da Suécia, uma economia desenvolvida com foco em inovação, tecnologia e exportação de bens e serviços. A cotação da Coroa é influenciada pela política monetária do Riksbank, o banco central mais antigo do mundo, e pelo desempenho dos setores de exportação. A economia sueca é conhecida por sua estabilidade e forte setor de serviços, mas também pode ser sensível a mudanças no cenário global.",
+        "period_days": 90
+    },
+    "Irã": {
+        "moeda": "Rial Iraniano", "ticker": "IRR", "codigo": "IRR", "flag": "🇮🇷",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Flag_of_Iran.svg",
+        "silhouette": "https://images.vexels.com/media/users/3/331490/isolated/preview/38ab390852b63714624f0fe6ff24c901-silhouette-map-of-iran-design.png",
+        "color": "#239F40", "keywords": ["Irã", "economia iraniana", "rial", "sanções"],
+        "description": "O Rial Iraniano é a moeda oficial do Irã, uma nação com uma economia fortemente baseada em petróleo. A moeda tem sido historicamente afetada por sanções internacionais, que limitam o acesso a mercados globais e a investimentos. Sua cotação é marcada por volatilidade e uma forte distinção entre as taxas de câmbio oficiais e as do mercado paralelo, refletindo as complexidades do cenário político e econômico do país.",
         "period_days": 90
     },
     "Bitcoin": {
         "moeda": "Bitcoin", "ticker": "BTC", "codigo": "BTC", "flag": "₿",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg",
-        "silhouette": "",
+        "silhouette": "https://png.pngtree.com/png-vector/20240816/ourmid/pngtree-bitcoin-symbol-btc-gold-plate-on-transparent-background-png-image_13503828.png",
         "color": "#F7931A",
         "keywords": ["Bitcoin", "crypto", "preço Bitcoin", "BTC"],
-        "description": "O Bitcoin é a primeira e mais conhecida criptomoeda descentralizada, baseada em tecnologia blockchain e frequentemente considerada 'ouro digital'.",
+        "description": "O Bitcoin é a primeira e mais conhecida criptomoeda descentralizada, baseada em tecnologia blockchain. Lançado em 2009, ele serve como uma forma de 'ouro digital' para muitos investidores, sendo visto como uma reserva de valor e uma proteção contra a inflação das moedas tradicionais. Sua extrema volatilidade e a natureza descentralizada o tornam um ativo de alto risco e de grande interesse no mercado financeiro global.",
         "period_days": 180
     },
     "Ethereum": {
         "moeda": "Ethereum", "ticker": "ETH", "codigo": "ETH", "flag": "Ξ",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg",
-        "silhouette": "",
+        "silhouette": "https://png.pngtree.com/png-clipart/20250105/original/pngtree-ethereum-cryptocurrency-coin-represents-modern-finance-and-digital-currency-growth-png-image_19122532.png",
         "color": "#627EEA",
         "keywords": ["Ethereum", "crypto", "preço Ethereum", "ETH"],
-        "description": "Ethereum é uma plataforma de blockchain descentralizada de código aberto com funcionalidade de contrato inteligente. Ether (ETH) é a sua criptomoeda nativa.",
+        "description": "Ethereum é a segunda maior criptomoeda e uma plataforma de blockchain descentralizada de código aberto. Sua principal inovação é a funcionalidade de contrato inteligente, que permite a criação de aplicações descentralizadas (dApps), finanças descentralizadas (DeFi) e tokens não fungíveis (NFTs). A cotação do Ether (ETH), a moeda nativa da plataforma, é influenciada pela adoção e desenvolvimento de seu ecossistema.",
         "period_days": 180
     },
     "Litecoin": {
         "moeda": "Litecoin", "ticker": "LTC", "codigo": "LTC", "flag": "Ł",
-        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Litecoin_Logo_2017.svg",
-        "silhouette": "",
+        "flag_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1dn-Q-AmFkN9D2CWb30Y-UOZEH01vb0gqnw&s",
+        "silhouette": "https://png.pngtree.com/png-clipart/20240428/original/pngtree-gold-futuristic-litecoin-cryptocurrency-coin-png-image_14960708.png",
         "color": "#BFBFBF",
         "keywords": ["Litecoin", "crypto", "preço Litecoin", "LTC"],
-        "description": "O Litecoin é uma criptomoeda peer-to-peer e projeto de software de código aberto, criada como um 'fork' do Bitcoin com foco em velocidade de transação.",
+        "description": "O Litecoin é uma criptomoeda peer-to-peer e projeto de software de código aberto, criado em 2011 como um 'fork' do Bitcoin. Conhecido como a 'prata para o ouro do Bitcoin', o Litecoin foi projetado para ter um tempo de processamento de bloco mais rápido (2,5 minutos versus 10 minutos do Bitcoin) e uma quantidade total maior de moedas. Sua cotação é impulsionada pela adoção e interesse no mercado de criptoativos, mas geralmente segue as tendências do Bitcoin.",
         "period_days": 180
     }
 }
