@@ -39,7 +39,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Rublo Russo", "ticker": "RUB", "codigo": "RUB", "flag": "🇷🇺",
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg",
         "silhouette": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Babayasin_Russia_outline_map.svg/1280px-Babayasin_Russia_outline_map.png",
-        "color": "#D52B1E", "keywords": ["Rússia", "economia russa", "rublo", "gás", "petróleo", "sanções"],
+        "color": "#D52B1E",
+        "keywords": ["Rússia", "economia russa", "rublo", "gás", "petróleo", "sanções"],
         "description": "O Rublo Russo é a moeda da Rússia, uma economia globalmente integrada e altamente dependente das exportações de commodities como petróleo e gás natural. Sua cotação é sensível a eventos geopolíticos, a flutuações nos preços das commodities e a sanções econômicas internacionais, refletindo a complexidade do cenário político e comercial global.",
         "period_days": 30
     },
@@ -47,7 +48,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Rúpia Indiana", "ticker": "INR", "codigo": "INR", "flag": "🇮🇳",
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
         "silhouette": "https://static.vecteezy.com/system/resources/previews/037/797/947/non_2x/country-map-india-free-png.png",
-        "color": "#FF9933", "keywords": ["Índia", "economia indiana", "rúpia"],
+        "color": "#FF9933",
+        "keywords": ["Índia", "economia indiana", "rúpia"],
         "description": "A Rúpia Indiana é a moeda oficial da Índia, a quinta maior economia do mundo e uma das que apresenta o crescimento mais acelerado. Sua performance é impulsionada por um forte setor de tecnologia da informação, um mercado consumidor em expansão e investimentos em infraestrutura. A política monetária do Reserve Bank of India e a dinâmica do mercado de trabalho são cruciais para sua estabilidade.",
         "period_days": 90
     },
@@ -55,7 +57,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Yuan Chinês", "ticker": "CNY", "codigo": "CNY", "flag": "🇨🇳",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg",
         "silhouette": "https://www.pngmart.com/files/21/China-Silhoutte-PNG-HD.png",
-        "color": "#DE2910", "keywords": ["China", "economia chinesa", "yuan", "comércio"],
+        "color": "#DE2910",
+        "keywords": ["China", "economia chinesa", "yuan", "comércio"],
         "description": "O Yuan Chinês, ou Renminbi, é a moeda da China, a segunda maior economia do mundo e um centro vital de manufatura e comércio global. A estabilidade de sua cotação é de grande importância para o comércio internacional, e sua política cambial é gerenciada pelo Banco Popular da China. A moeda reflete tanto a força industrial do país quanto as relações comerciais com seus parceiros globais.",
         "period_days": 90
     },
@@ -63,7 +66,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Rand Sul-Africano", "ticker": "ZAR", "codigo": "ZAR", "flag": "🇿🇦",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg",
         "silhouette": "https://png.pngtree.com/png-clipart/20230807/original/pngtree-simple-flat-vector-illustration-of-south-africa-in-solid-black-silhouette-with-country-area-map-vector-picture-image_10081507.png",
-        "color": "#007A4D", "keywords": ["África do Sul", "economia sul-africana", "rand"],
+        "color": "#007A4D",
+        "keywords": ["África do Sul", "economia sul-africana", "rand"],
         "description": "O Rand Sul-Africano é a moeda da África do Sul, a nação mais industrializada do continente. Sua cotação está intimamente ligada ao desempenho do setor de mineração, especialmente ouro e platina, e à estabilidade política interna. A moeda é um reflexo direto dos desafios e oportunidades econômicas do país, incluindo questões de emprego e infraestrutura.",
         "period_days": 90
     },
@@ -71,7 +75,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Peso Argentino", "ticker": "ARS", "codigo": "ARS", "flag": "🇦🇷",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg",
         "silhouette": "https://png.pngtree.com/png-clipart/20230807/original/pngtree-simple-flat-vector-illustration-of-argentinasolid-black-silhouette-map-depicting-the-countrys-area-vector-picture-image_10081545.png",
-        "color": "#74ACDF", "keywords": ["Argentina", "economia argentina", "peso argentino", "crise", "inflação"],
+        "color": "#74ACDF",
+        "keywords": ["Argentina", "economia argentina", "peso argentino", "crise", "inflação"],
         "description": "O Peso Argentino é a moeda oficial da Argentina, uma economia marcada por períodos de alta inflação e volatilidade. Sua cotação é um termômetro da estabilidade fiscal e das políticas do governo. O mercado cambial argentino é influenciado por fatores como a confiança dos investidores, negociações da dívida e a produção agrícola do país.",
         "period_days": 30
     },
@@ -79,7 +84,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Libra Egípcia", "ticker": "EGP", "codigo": "EGP", "flag": "🇪🇬",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg",
         "silhouette": "https://cdn.creazilla.com/silhouettes/2560/egypt-map-silhouette-000000-md.png",
-        "color": "#C8102E", "keywords": ["Egito", "economia egípcia", "libra egípcia"],
+        "color": "#C8102E",
+        "keywords": ["Egito", "economia egípcia", "libra egípcia"],
         "description": "A Libra Egípcia é a moeda do Egito, uma economia que lida com desafios fiscais e a dependência do turismo, das remessas de egípcios no exterior e da receita do Canal de Suez. A sua cotação é afetada por medidas de política econômica, como a flutuação controlada do câmbio, e por tensões geopolíticas regionais.",
         "period_days": 90
     },
@@ -87,7 +93,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Riyal Saudita", "ticker": "SAR", "codigo": "SAR", "flag": "🇸🇦",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Flag_of_Saudi_Arabia.svg",
         "silhouette": "https://images.vexels.com/media/users/3/314245/isolated/preview/6945b1c55e7dacfa13d16e65f599c231-uma-silhueta-do-mapa-da-arabia-saudita.png",
-        "color": "#245C36", "keywords": ["Arábia Saudita", "economia saudita", "riyal", "petróleo", "OPEP"],
+        "color": "#245C36",
+        "keywords": ["Arábia Saudita", "economia saudita", "riyal", "petróleo", "OPEP"],
         "description": "O Riyal Saudita, moeda oficial da Arábia Saudita, é um dos principais indicadores da economia do Oriente Médio. Sua cotação é indexada ao Dólar Americano, garantindo estabilidade. A economia saudita é a maior do mundo árabe e é fortemente dependente da exportação de petróleo. Mudanças na política da OPEP e nos preços globais do petróleo impactam diretamente a economia do país.",
         "period_days": 90
     },
@@ -95,7 +102,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Dólar Americano", "ticker": "USD", "codigo": "USD", "flag": "🇺🇸",
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg",
         "silhouette": "https://www.pngplay.com/wp-content/uploads/12/USA-Map-PNG-HD-Photos.png",
-        "color": "#3C3B6E", "keywords": ["Estados Unidos", "economia americana", "dólar", "taxa de juros", "inflação"],
+        "color": "#3C3B6E",
+        "keywords": ["Estados Unidos", "economia americana", "dólar", "taxa de juros", "inflação"],
         "description": "O Dólar Americano é a principal moeda de reserva global e a mais negociada no mundo. A sua cotação reflete não apenas a saúde da economia dos EUA, mas também a confiança global. Decisões do Federal Reserve (o banco central americano), dados sobre inflação e emprego, e o cenário político internacional têm um impacto direto em seu valor, afetando mercados financeiros em todo o planeta.",
         "period_days": 120
     },
@@ -103,7 +111,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Euro", "ticker": "EUR", "codigo": "EUR", "flag": "🇪🇺",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg",
         "silhouette": "https://png.pngtree.com/png-clipart/20230807/original/pngtree-eu-flag-overlay-on-vector-map-of-european-union-vector-picture-image_10053056.png",
-        "color": "#003399", "keywords": ["União Europeia", "euro", "economia europeia", "BCE", "inflação"],
+        "color": "#003399",
+        "keywords": ["União Europeia", "euro", "economia europeia", "BCE", "inflação"],
         "description": "O Euro é a moeda comum de 19 países da União Europeia, sendo a segunda maior moeda de reserva global. A sua cotação reflete a saúde econômica de um bloco diversificado de nações. Decisões do Banco Central Europeu (BCE), a estabilidade financeira dos países-membros e o desempenho de setores chave como indústria e serviços influenciam diretamente o valor do Euro.",
         "period_days": 120
     },
@@ -111,7 +120,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Iene Japonês", "ticker": "JPY", "codigo": "JPY", "flag": "🇯🇵",
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg",
         "silhouette": "https://static.vecteezy.com/system/resources/previews/037/797/980/non_2x/country-map-japan-free-png.png",
-        "color": "#BC002D", "keywords": ["Japão", "economia japonesa", "iene", "juros negativos"],
+        "color": "#BC002D",
+        "keywords": ["Japão", "economia japonesa", "iene", "juros negativos"],
         "description": "O Iene Japonês é a moeda do Japão, uma das economias mais desenvolvidas e tecnologicamente avançadas do mundo. A sua cotação é influenciada pela política monetária do Banco do Japão, que tem mantido taxas de juros ultra-baixas, e pelas exportações de bens de alta tecnologia. O Iene é considerado um 'porto seguro' em tempos de incerteza global, atraindo investidores.",
         "period_days": 90
     },
@@ -119,7 +129,8 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Libra Esterlina", "ticker": "GBP", "codigo": "GBP", "flag": "🇬🇧",
         "flag_img": "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg",
         "silhouette": "https://cdn.creazilla.com/silhouettes/2353/great-britain-silhouette-000000-xl.png",
-        "color": "#012169", "keywords": ["Reino Unido", "economia britânica", "libra esterlina", "Brexit"],
+        "color": "#012169",
+        "keywords": ["Reino Unido", "economia britânica", "libra esterlina", "Brexit"],
         "description": "A Libra Esterlina é a moeda do Reino Unido e uma das mais importantes do mundo. A sua cotação reflete a saúde da economia britânica, que é dominada pelo setor de serviços, especialmente finanças. A política do Banco da Inglaterra e as negociações comerciais pós-Brexit continuam a ter um grande impacto sobre o seu valor no mercado internacional.",
         "period_days": 90
     },
@@ -127,11 +138,114 @@ MOEDAS_DISPONIVEIS = {
         "moeda": "Dirham", "ticker": "AED", "codigo": "AED", "flag": "🇦🇪",
         "flag_img": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_United_Arab_Emirates.svg",
         "silhouette": "https://cdn.pixabay.com/photo/2016/04/29/00/41/united-arab-emerites-1360076_1280.png",
-        "color": "#00843D", "keywords": ["Emirados Árabes Unidos", "economia dos Emirados", "dirham", "petróleo"],
+        "color": "#00843D",
+        "keywords": ["Emirados Árabes Unidos", "economia dos Emirados", "dirham", "petróleo"],
         "description": "O Dirham dos Emirados Árabes Unidos é uma moeda estável, que também é atrelada ao Dólar Americano. Sua estabilidade é um pilar para o crescimento da economia do país, que se diversificou para além do petróleo e inclui setores como turismo, finanças e tecnologia. O Dirham reflete a força econômica dos Emirados, um polo de negócios e inovação na região.",
         "period_days": 90
     },
+    "Canadá": {
+        "moeda": "Dólar Canadense", "ticker": "CAD", "codigo": "CAD", "flag": "🇨🇦",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg",
+        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Canada_%28orthographic_projection%29.svg",
+        "color": "#D41E38",
+        "keywords": ["Dólar Canadense", "economia Canadá", "juros Canadá", "inflação Canadá"],
+        "description": "O Dólar Canadense é a moeda do Canadá, uma economia desenvolvida e rica em recursos naturais, como petróleo e minerais.",
+        "period_days": 90
+    },
+    "Austrália": {
+        "moeda": "Dólar Australiano", "ticker": "AUD", "codigo": "AUD", "flag": "🇦🇺",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/8/87/Flag_of_Australia_%28converted%29.svg",
+        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Australia_%28orthographic_projection%29.svg",
+        "color": "#00008B",
+        "keywords": ["Dólar Australiano", "economia Austrália", "juros Austrália", "inflação Austrália"],
+        "description": "O Dólar Australiano é a moeda da Austrália, uma economia robusta e diversificada, com destaque para a mineração e o setor de serviços.",
+        "period_days": 90
+    },
+    "Suíça": {
+        "moeda": "Franco Suíço", "ticker": "CHF", "codigo": "CHF", "flag": "🇨🇭",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/0/08/Flag_of_Switzerland.svg",
+        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Switzerland_%28orthographic_projection%29.svg",
+        "color": "#FF0000",
+        "keywords": ["Franco Suíço", "economia Suíça", "juros Suíça", "inflação Suíça"],
+        "description": "O Franco Suíço é a moeda da Suíça, conhecida por sua economia estável e sistema financeiro seguro, sendo um porto seguro para investidores.",
+        "period_days": 90
+    },
+    "México": {
+        "moeda": "Peso Mexicano", "ticker": "MXN", "codigo": "MXN", "flag": "🇲🇽",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Flag_of_Mexico.svg",
+        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Mexico_%28orthographic_projection%29.svg",
+        "color": "#006847",
+        "keywords": ["Peso Mexicano", "economia México", "juros México", "inflação México"],
+        "description": "O Peso Mexicano é a moeda oficial do México, uma economia emergente com fortes laços comerciais com os Estados Unidos.",
+        "period_days": 90
+    },
+    "Turquia": {
+        "moeda": "Lira Turca", "ticker": "TRY", "codigo": "TRY", "flag": "🇹🇷",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg",
+        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Turkey_%28orthographic_projection%29.svg",
+        "color": "#E30A17",
+        "keywords": ["Lira Turca", "economia Turquia", "juros Turquia", "inflação Turquia"],
+        "description": "A Lira Turca é a moeda da Turquia, uma economia em transição, com desafios recentes de inflação e estabilidade.",
+        "period_days": 90
+    },
+    "Coreia do Sul": {
+        "moeda": "Won Sul-Coreano", "ticker": "KRW", "codigo": "KRW", "flag": "🇰🇷",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg",
+        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/e/ea/South_Korea_%28orthographic_projection%29.svg",
+        "color": "#0047A0",
+        "keywords": ["Won Sul-Coreano", "economia Coreia do Sul", "juros Coreia do Sul", "inflação Coreia do Sul"],
+        "description": "O Won Sul-Coreano é a moeda da Coreia do Sul, uma das maiores economias asiáticas, líder em tecnologia e inovação.",
+        "period_days": 90
+    },
+    "Noruega": {
+        "moeda": "Coroa Norueguesa", "ticker": "NOK", "codigo": "NOK", "flag": "🇳🇴",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg",
+        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Norway_%28orthographic_projection%29.svg",
+        "color": "#BA0C2F",
+        "keywords": ["Coroa Norueguesa", "economia Noruega", "juros Noruega", "inflação Noruega"],
+        "description": "A Coroa Norueguesa é a moeda da Noruega, uma economia forte e estável, impulsionada por vastas reservas de petróleo e gás natural.",
+        "period_days": 90
+    },
+    "Suécia": {
+        "moeda": "Coroa Sueca", "ticker": "SEK", "codigo": "SEK", "flag": "🇸🇪",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg",
+        "silhouette": "https://upload.wikimedia.org/wikipedia/commons/3/30/Sweden_%28orthographic_projection%29.svg",
+        "color": "#FECC01",
+        "keywords": ["Coroa Sueca", "economia Suécia", "juros Suécia", "inflação Suécia"],
+        "description": "A Coroa Sueca é a moeda da Suécia, uma economia desenvolvida com foco em inovação, exportação de bens de alta tecnologia e serviços.",
+        "period_days": 90
+    },
+    "Bitcoin": {
+        "moeda": "Bitcoin", "ticker": "BTC", "codigo": "BTC", "flag": "₿",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg",
+        "silhouette": "",
+        "color": "#F7931A",
+        "keywords": ["Bitcoin", "crypto", "preço Bitcoin", "BTC"],
+        "description": "O Bitcoin é a primeira e mais conhecida criptomoeda descentralizada, baseada em tecnologia blockchain e frequentemente considerada 'ouro digital'.",
+        "period_days": 180
+    },
+    "Ethereum": {
+        "moeda": "Ethereum", "ticker": "ETH", "codigo": "ETH", "flag": "Ξ",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg",
+        "silhouette": "",
+        "color": "#627EEA",
+        "keywords": ["Ethereum", "crypto", "preço Ethereum", "ETH"],
+        "description": "Ethereum é uma plataforma de blockchain descentralizada de código aberto com funcionalidade de contrato inteligente. Ether (ETH) é a sua criptomoeda nativa.",
+        "period_days": 180
+    },
+    "Litecoin": {
+        "moeda": "Litecoin", "ticker": "LTC", "codigo": "LTC", "flag": "Ł",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Litecoin_Logo_2017.svg",
+        "silhouette": "",
+        "color": "#BFBFBF",
+        "keywords": ["Litecoin", "crypto", "preço Litecoin", "LTC"],
+        "description": "O Litecoin é uma criptomoeda peer-to-peer e projeto de software de código aberto, criada como um 'fork' do Bitcoin com foco em velocidade de transação.",
+        "period_days": 180
+    }
 }
+
+# Países que realmente fazem parte do BRICS (membros oficiais)
+BRICS_MEMBERS = ["Brasil", "Rússia", "Índia", "China", "África do Sul"]
 
 # =========================================================================================
 # === FUNÇÃO DE BUSCA DE DADOS E ANÁLISE DE SENTIMENTO ====================================
@@ -302,7 +416,8 @@ def list_countries():
             "flag": info["flag"],
             "moeda": info["moeda"],
             "color": info["color"],
-            "description": info["description"]
+            "description": info["description"],
+            "is_brics_member": country in BRICS_MEMBERS  # Adiciona esta linha
         })
     return jsonify(countries)
 

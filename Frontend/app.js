@@ -22,22 +22,34 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Criar card de moeda
-    const createCard = (country) => {
-        const cardDiv = document.createElement('div');
-        cardDiv.className = `currency-card bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer`;
-        cardDiv.style.borderLeft = `8px solid ${country.color}`;
-        cardDiv.innerHTML = `
-            <div class="flex items-center space-x-4">
-                <span class="text-4xl">${country.flag}</span>
-                <div>
-                    <h3 class="text-xl font-bold text-gray-800">${country.name}</h3>
-                    <p class="text-sm text-gray-600">${country.moeda}</p>
-                </div>
-            </div
-        `;
-        cardDiv.addEventListener('click', () => analyzeCurrency(country.name));
-        return cardDiv;
-    };
+    // Criar card de moeda
+const createCard = (country) => {
+    const cardDiv = document.createElement('div');
+    cardDiv.className = `currency-card bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer relative`;
+    cardDiv.style.borderLeft = `8px solid ${country.color}`;
+
+    // Adiciona badge BRICS se o país for membro
+    const bricsBadge = country.is_brics_member ? `
+        <div class="absolute top-2 right-2">
+            <span class="bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center">
+                <i class="fas fa-star mr-1 text-xs"></i> BRICS
+            </span>
+        </div>
+    ` : '';
+
+    cardDiv.innerHTML = `
+        ${bricsBadge}
+        <div class="flex items-center space-x-4">
+            <span class="text-4xl">${country.flag}</span>
+            <div>
+                <h3 class="text-xl font-bold text-gray-800">${country.name}</h3>
+                <p class="text-sm text-gray-600">${country.moeda}</p>
+            </div>
+        </div>
+    `;
+    cardDiv.addEventListener('click', () => analyzeCurrency(country.name));
+    return cardDiv;
+};
 
     // Buscar lista de países
     const fetchCountries = async () => {
@@ -92,44 +104,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderAnalysis = (data) => {
         const info = data.country_info;
-    
+
         // Análse do País
         const countryDescriptionElement = document.getElementById('country-analysis-content').querySelector('p');
         countryDescriptionElement.textContent = data.country_info.description;
         const keywordsElement = document.getElementById('country-analysis-content').querySelector('.keywords-text');
         keywordsElement.textContent = data.country_info.keywords.join(', ');
-    
+
         // Atualizar elementos da página
         document.getElementById('currency-title').textContent = `${info.name} - ${info.moeda}`;
         document.getElementById('reliability-text').textContent = `Confiabilidade do modelo: ${data.reliability}%`;
         document.getElementById('country-flag').src = info.flag_img;
         document.getElementById('country-silhouette').src = info.silhouette;
-    
+
         // Atualizar taxas
         document.getElementById('last-rate').textContent = data.last_rate.toFixed(4);
         document.getElementById('predicted-rate').textContent = data.predicted_rate_1m.toFixed(4);
         document.getElementById('predicted-rate-3months').textContent = data.predicted_rate_3m.toFixed(4);
         document.getElementById('predicted-rate-6months').textContent = data.predicted_rate_6m.toFixed(4);
-    
+
         // Variação percentual
         const changePercent = document.getElementById('change-percent');
         changePercent.textContent = `${data.change >= 0 ? '+' : ''}${data.change.toFixed(2)}%`;
         changePercent.className = `text-2xl font-bold ${data.change >= 0 ? 'text-green-900' : 'text-red-900'}`;
-    
+
         // Barra de confiabilidade
         const reliabilityBar = document.getElementById('reliability-bar');
         reliabilityBar.style.width = `${data.reliability}%`;
         reliabilityBar.className = `h-full transition-all duration-1000 ${getReliabilityColor(data.reliability)}`;
-    
+
         document.getElementById('reliability-percent').textContent = `${data.reliability}%`;
-    
+
         // Nível de risco
         const riskLevelElement = document.getElementById('risk-level');
         const riskIndicatorBar = document.getElementById('risk-indicator-bar');
-    
+
         riskLevelElement.textContent = data.risk_level;
         riskLevelElement.className = `font-bold ${getRiskColor(data.risk_level)}`;
-    
+
         // Define a largura da barra de risco com base no nível
         let barWidth = 0;
         let barColorClass = '';
@@ -143,18 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
             barWidth = '100%';
             barColorClass = 'bg-red-500';
         }
-    
+
         // Remove todas as classes de cor e aplica a nova
         riskIndicatorBar.classList.remove('bg-green-500', 'bg-yellow-500', 'bg-red-500');
         riskIndicatorBar.classList.add(barColorClass);
         riskIndicatorBar.style.width = barWidth;
-    
+
         // Renderizar gráfico
         renderChart(data.historical_data, info, data);
-        
+
         // Renderizar notícias
         renderNews(data.news);
-    
+
         // Atualizar datas
         const today = new Date();
         document.getElementById('last-date').textContent = formatDate(today);
@@ -162,11 +174,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('prediction-date-3months').textContent = formatDate(addDays(today, 90));
         document.getElementById('prediction-date-6months').textContent = formatDate(addDays(today, 180));
     };
-    
+
     // Renderizar notícias
     const renderNews = (newsData) => {
         if (!newsContainer) return;
-        
+
         newsContainer.innerHTML = '';
         if (newsData.length === 0) {
             newsContainer.innerHTML = '<p class="text-gray-500 text-center">Nenhuma notícia recente encontrada.</p>';

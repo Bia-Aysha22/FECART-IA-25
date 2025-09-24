@@ -259,3 +259,16 @@ html {
         padding: 15px;
     }
 }
+
+    .brics-badge {
+        background: linear-gradient(45deg, #FFD700, #FFA500);
+        color: #8B4513;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
