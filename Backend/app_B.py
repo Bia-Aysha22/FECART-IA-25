@@ -29,7 +29,8 @@ else:
 # A NewsAPI, por sua vez, exige uma chave. Você pode adicionar mais chaves aqui.
 NEWS_API_KEYS = [
     "579cf0d4f8be4534a96cfa001c58d315",
-    "42656565682945dc9cb3d46235d88281"
+    "42656565682945dc9cb3d46235d88281",
+    "2bc4889d67f24aa09de7002a11a57bc8"
 ]
 
 # Mapeamento de moedas para os tickers da AwesomeAPI e informações completas
