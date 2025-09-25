@@ -206,12 +206,22 @@ MOEDAS_DISPONIVEIS = {
         "description": "A Coroa Sueca é a moeda da Suécia, uma economia desenvolvida com foco em inovação, tecnologia e exportação de bens e serviços. A cotação da Coroa é influenciada pela política monetária do Riksbank, o banco central mais antigo do mundo, e pelo desempenho dos setores de exportação. A economia sueca é conhecida por sua estabilidade e forte setor de serviços, mas também pode ser sensível a mudanças no cenário global.",
         "period_days": 90
     },
-    "Irã": {
-        "moeda": "Rial Iraniano", "ticker": "IRR", "codigo": "IRR", "flag": "🇮🇷",
-        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Flag_of_Iran.svg",
-        "silhouette": "https://images.vexels.com/media/users/3/331490/isolated/preview/38ab390852b63714624f0fe6ff24c901-silhouette-map-of-iran-design.png",
-        "color": "#239F40", "keywords": ["Irã", "economia iraniana", "rial", "sanções"],
-        "description": "O Rial Iraniano é a moeda oficial do Irã, uma nação com uma economia fortemente baseada em petróleo. A moeda tem sido historicamente afetada por sanções internacionais, que limitam o acesso a mercados globais e a investimentos. Sua cotação é marcada por volatilidade e uma forte distinção entre as taxas de câmbio oficiais e as do mercado paralelo, refletindo as complexidades do cenário político e econômico do país.",
+    "Noruega": {
+        "moeda": "Coroa Norueguesa", "ticker": "NOK", "codigo": "NOK", "flag": "🇳🇴",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg",
+        "silhouette": "https://static.vecteezy.com/system/resources/previews/037/797/989/non_2x/country-map-norway-free-png.png",
+        "color": "#BA0C2F",
+        "keywords": ["Coroa Norueguesa", "economia Noruega", "petróleo Noruega", "gás"],
+        "description": "A Coroa Norueguesa é a moeda da Noruega, uma economia pequena, mas extremamente rica, impulsionada por vastas reservas de petróleo e gás. Sua cotação é sensível a flutuações nos preços globais do petróleo e à política do Norges Bank. A estabilidade política e o fundo soberano do país a tornam uma moeda confiável.",
+        "period_days": 90
+    },
+    "Singapura": {
+        "moeda": "Dólar de Singapura", "ticker": "SGD", "codigo": "SGD", "flag": "🇸🇬",
+        "flag_img": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Flag_of_Singapore.svg",
+        "silhouette": "https://www.pngmart.com/files/15/Singapore-Map-PNG-Image.png",
+        "color": "#EF4026",
+        "keywords": ["Dólar de Singapura", "economia Singapura", "política monetária de Singapura", "comércio asiático"],
+        "description": "O Dólar de Singapura é a moeda de Singapura, um dos maiores centros financeiros e de comércio do mundo. Sua cotação é gerenciada pelo banco central do país por meio de uma 'banda de câmbio' em relação a outras moedas. A estabilidade do SGD reflete o sucesso de Singapura como uma economia de alta tecnologia e o seu papel estratégico no comércio global.",
         "period_days": 90
     },
     "Bitcoin": {
@@ -406,29 +416,86 @@ def model_3_linear_regression(historical_data, sentiment_score, days_to_predict)
     final_prediction = prediction * (1 + sentiment_score * 0.005)
     return final_prediction
 
+def model_4_arima_prediction(historical_data, days_to_predict):
+    """
+    Modelo de previsão usando ARIMA para capturar tendências e sazonalidade.
+    """
+    if len(historical_data) < 60:
+        return historical_data[-1]['value']
+
+    prices = [item['value'] for item in historical_data]
+    try:
+        # A ordem (p,d,q) pode ser ajustada ou otimizada com um grid search.
+        # Aqui, usamos uma ordem simples para demonstração.
+        model = ARIMA(prices, order=(5,1,0))
+        model_fit = model.fit()
+        forecast = model_fit.forecast(steps=days_to_predict)[-1]
+        return forecast
+    except Exception as e:
+        print(f"Erro no modelo ARIMA: {e}")
+        return prices[-1]
+
 def calculate_ensemble_prediction(historical_data, sentiment_score, days_to_predict):
     """
-    Combina previsões de múltiplos modelos e ajusta com base no sentimento de notícias.
+    Combina previsões de múltiplos modelos com ponderação dinâmica e ajusta
+    com base no sentimento de notícias.
     """
-    if len(historical_data) < 7:
+    if len(historical_data) < 60:
         last_rate = historical_data[-1]['value']
         return last_rate, 0, "Alto"
 
     prices = [item['value'] for item in historical_data]
 
-    # Obter previsões de cada modelo
+    # Divide os dados para treinar e validar os modelos
+    training_data = historical_data[:-30]
+    validation_data = historical_data[-30:]
+    validation_prices = [item['value'] for item in validation_data]
+
+    # Obter previsões de cada modelo para o período de validação
+    pred_1_val = [model_1_trend_prediction([item['value'] for item in training_data[:i+1]]) for i in range(len(validation_data))]
+    pred_2_val = [model_2_simple_average([item['value'] for item in training_data[:i+1]]) for i in range(len(validation_data))]
+    pred_3_val = [model_3_linear_regression(training_data[:i+1], sentiment_score, 1) for i in range(len(validation_data))]
+    pred_4_val = [model_4_arima_prediction(training_data[:i+1], 1) for i in range(len(validation_data))]
+
+    # Calcular o Erro Absoluto Médio (MAE) para cada modelo
+    mae_1 = np.mean(np.abs(np.array(pred_1_val) - np.array(validation_prices)))
+    mae_2 = np.mean(np.abs(np.array(pred_2_val) - np.array(validation_prices)))
+    mae_3 = np.mean(np.abs(np.array(pred_3_val) - np.array(validation_prices)))
+    mae_4 = np.mean(np.abs(np.array(pred_4_val) - np.array(validation_prices)))
+
+    # Calcular pesos dinâmicos. Modelos com menor MAE recebem maior peso.
+    total_mae = mae_1 + mae_2 + mae_3 + mae_4 + 0.00001
+    weight_1 = 1 - (mae_1 / total_mae)
+    weight_2 = 1 - (mae_2 / total_mae)
+    weight_3 = 1 - (mae_3 / total_mae)
+    weight_4 = 1 - (mae_4 / total_mae)
+    total_weights = weight_1 + weight_2 + weight_3 + weight_4
+
+    if total_weights > 0:
+        weight_1 /= total_weights
+        weight_2 /= total_weights
+        weight_3 /= total_weights
+        weight_4 /= total_weights
+
+    # Obter previsões finais usando os dados completos
     prediction_1 = model_1_trend_prediction(prices)
     prediction_2 = model_2_simple_average(prices)
     prediction_3 = model_3_linear_regression(historical_data, sentiment_score, days_to_predict)
+    prediction_4 = model_4_arima_prediction(historical_data, days_to_predict)
 
-    # Combinar as previsões usando uma média ponderada
-    ensemble_prediction = (prediction_1 * 0.40 + prediction_2 * 0.50 + prediction_3 * 0.10)
+    # Combinação final das previsões com pesos dinâmicos
+    ensemble_prediction = (
+        prediction_1 * weight_1 +
+        prediction_2 * weight_2 +
+        prediction_3 * weight_3 +
+        prediction_4 * weight_4
+    )
 
-    final_prediction = ensemble_prediction
+    final_prediction = ensemble_prediction * (1 + sentiment_score * 0.005)
 
     # Calcular a variância entre as previsões dos modelos
-    predictions = [prediction_1, prediction_2, prediction_3]
-    variance = sum([(p - ensemble_prediction)**2 for p in predictions]) / len(predictions)
+    predictions = [prediction_1, prediction_2, prediction_3, prediction_4]
+    variance = np.var(predictions)
 
     # A confiabilidade é inversamente proporcional à variância
     max_possible_variance = (max(prices) - min(prices))**2
