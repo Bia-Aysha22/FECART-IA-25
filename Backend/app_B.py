@@ -13,7 +13,9 @@ from sklearn.linear_model import LinearRegression
 STATIC_FOLDER = os.path.join(os.path.dirname(__file__), "..", "Frontend")
 
 # Configuração do Flask
-app = Flask(__name__, static_folder=STATIC_FOLDER)
+# static_url_path='' faz com que arquivos estáticos fiquem disponíveis na raiz,
+# permitindo acessar /app.js, /style.css etc.
+app = Flask(__name__, static_folder=STATIC_FOLDER, static_url_path="")
 CORS(app)
 
 # Adiciona o caminho para os certificados SSL confiáveis.
