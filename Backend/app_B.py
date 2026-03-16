@@ -9,8 +9,11 @@ import os
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
+# Caminho estático para os arquivos do frontend (index_F.html, app.js, etc.)
+STATIC_FOLDER = os.path.join(os.path.dirname(__file__), "..", "Frontend")
+
 # Configuração do Flask
-app = Flask(__name__, static_folder='.')
+app = Flask(__name__, static_folder=STATIC_FOLDER)
 CORS(app)
 
 # Adiciona o caminho para os certificados SSL confiáveis.
@@ -577,4 +580,7 @@ def serve_index():
     return send_from_directory(app.static_folder, 'index_F.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # Em produção (Render), a porta vem da variável de ambiente PORT.
+    # Em desenvolvimento local, usamos 5000 como padrão.
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

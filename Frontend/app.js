@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const backendUrl = 'http://127.0.0.1:5000/api';
+    // Em produção (Render), usamos a mesma origem do backend (Flask),
+    // então o caminho base é relativo.
+    const backendUrl = '/api';
 
     const cardsContainer = document.getElementById('currency-cards');
     const analysisSection = document.getElementById('analysis-section');
